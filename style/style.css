@@ -1,3 +1,73 @@
+/* body{
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Courier New', Courier, monospace;
+} */
+@font-face {
+    font-family: 'consolas';
+    src: url('consolas.ttf') format('truetype');
+}
+
+body{
+    font-family: consolas;
+}
+
+.light{
+    font-family: consolas;
+    color: aliceblue;
+}
+
+.lead{
+    font-family: consolas;
+    color: aliceblue;
+}
+
+.card-hover-effect{
+    backdrop-filter: blur(20px);
+    background-color: rbga(255,255,255,0.4);
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: transform 0.35s ease, box-shadow 0.3s ease;
+}
+
+.card-hover-effect:hover{
+    transform: scale(1.03);
+    box-shadow: 0 10px 20px rbga(0,0,0,0.4);
+}
+
+.card-body{
+    padding: 30px;
+}
+
+.card-title {
+    font-family: consolas;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.card-text {
+    font-family: consolas;
+    text-align: left;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.card-text:last-child {
+    margin-bottom: 0;
+}
+
+.card-text b {
+    color: #007bff; /* Bootstrap primary color */
+}
+
 .hidden{
     visibility: hidden;
 }
