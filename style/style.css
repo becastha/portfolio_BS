@@ -1,12 +1,3 @@
-/* body{
-    background-color: #f0f0f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    font-family: 'Courier New', Courier, monospace;
-} */
 @font-face {
     font-family: 'consolas';
     src: url('consolas.ttf') format('truetype');
@@ -27,7 +18,7 @@ body {
 }
 
 .card-hover-effect {
-    backdrop-filter: blur(20px);
+    /* backdrop-filter: blur(0px); */
     background-color: rbga(255, 255, 255, 0.4);
     border-radius: 15px;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -134,4 +125,32 @@ body {
 
 .project-item:nth-child(3) {
     animation-delay: 0.9s;
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+    font-family: consolas;
+    width: 100%;
+    background: transparent;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    background: black;
+    cursor: pointer;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    font-family: consolas;
+    width: 100%;
+    height: 8px;
+    background: #ddd;
+    cursor: pointer;
+}
+
+.skill{
+    font-family: consolas;
 }

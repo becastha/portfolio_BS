@@ -64,3 +64,36 @@ function displayProject(projects, append) {
         container.insertAdjacentHTML('beforeend', projectElement);
     });
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('data/skills.json')
+        .then(response => response.json())
+        .then(skills => {
+            var skillsContainer = document.querySelector('#skills .card-body .card-title'); // Define the container
+
+            for (var skill in skills) {
+                var normalizedSkill = skill.replace(/\W/g, '');
+                var skillLevel = (skills[skill] === "Beginner") ? 1 : (skills[skill] === "Intermediate") ? 2 : 3;
+        
+                var skillDiv = document.createElement('div');
+                skillDiv.className = 'skill';
+        
+                var label = document.createElement('label');
+                label.htmlFor = normalizedSkill;
+                label.textContent = skill;
+        
+                var input = document.createElement('input');
+                input.type = 'range';
+                input.id = normalizedSkill;
+                input.min = '1';
+                input.max = '3';
+                input.value = skillLevel;
+        
+                skillDiv.appendChild(label);
+                skillDiv.appendChild(input);
+        
+                skillsContainer.appendChild(skillDiv);
+            }
+        })
+        .catch(error => console.log('Error loading the skills data:', error));
+});
