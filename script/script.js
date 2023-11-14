@@ -22,7 +22,7 @@ const nameElement = document.getElementById('blinking-name');
 typeEffect(nameElement,200);
 
 document.addEventListener('DOMContentLoaded', function() {
-    fetch('data/project.json')
+    fetch('./data/project.json')
         .then(response => response.json())
         .then(projects => {
             displayProject(projects.slice(0, 3), true); 
@@ -66,7 +66,7 @@ function displayProject(projects, append) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    fetch('data/skills.json')
+    fetch('./data/skills.json')
         .then(response => response.json())
         .then(skills => {
             var skillsContainer = document.querySelector('#skills .card-body .card-title'); // Define the container
