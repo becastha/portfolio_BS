@@ -1,0 +1,65 @@
+[
+    {
+        "year": "2023",
+        "title": "Bungo Coliseum「Development Phase」[Office Project]",
+        "role": "Working as a FullStack Developer",
+        "technologies": "Golang[fiber framework using REST API], Vuejs Framework, AWS[Ec2,Cognito,CloudFront,Aurora]",
+        "teamSize": "3 people",
+        "description": "web-app for creating and reading Novels where a user can read japanese novel in horizontal or vertically with Ruby characters"
+    },
+    {
+        "year": "2023",
+        "title": "RE:start「Development Phase」[Individual Project]",
+        "role": "Working as a FullStack Developer",
+        "technologies": "Golang[with REST API], Vuejs Framework, AWS[Ec2,Cognito,CloudFront,Aurora]",
+        "teamSize": "2 people",
+        "description": "web app for the Transfering University students where they can test and get score"
+    },
+    {
+        "year": "2022",
+        "title": "JACIC[Office Project]",
+        "role": "Worked as a Figma Designer for web app",
+        "technologies": "Figma",
+        "teamSize": "14 people",
+        "description": "Japanese Government soil depositing company,Need to make the user friendly Interface."
+    },
+    {
+        "year": "2021-2022",
+        "title": "BookYELL「ブックイェール」[Office Project]",
+        "role": "Worked as a Backend Developer as well as a System Designer[Front as well as API design]",
+        "technologies": "php[laravel framework],AWS[Ec2,Cognito,CloudFront,Aurora,Dynamodb]",
+        "teamSize": "14 people",
+        "description": "Japanese Government soil depositing company,Need to make the user friendly Interface."
+    },
+    {
+        "year": "2021",
+        "title": "Reitaku Global business「麗澤大学グローバルビジネス」 test score app[Individual Project]",
+        "role": "Worked as a Backend Developer as well as a System Designer[Front as well as API design]",
+        "technologies": "php,HTML,CSS,javascript",
+        "teamSize": "2 people",
+        "description": "office app for printing the test scores "
+    },
+    {
+        "year": "2021",
+        "title": "LandMark [Office Project]",
+        "role": "Worked as a Backend Developer as well as a QA",
+        "technologies": "php[laravel framework],GCP",
+        "teamSize": "2 people",
+        "description": "office app for printing the test scores "
+    },
+    {
+        "year": "2021",
+        "title": "Seigent [Office Project]",
+        "role": "Worked as a Backend Developer as well as a System Design + QA",
+        "technologies": "Nodejs[Express framework],GCP",
+        "teamSize": "1 people",
+        "description": "mobile app that get news from the company's news portal which was made in wordpress"
+    },{
+        "year": "2021",
+        "title": "卒Aru CMS側　[Office Project]",
+        "role": "Worked as a Backend Developer as well as a QA",
+        "technologies": "php[laravel framework],,AWS[Ec2,Cognito,CloudFront,Aurora,Dynamodb]",
+        "teamSize": "1 people",
+        "description": "mobile app that get news from the company's news portal which was made in wordpress"
+    }
+]

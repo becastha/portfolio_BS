@@ -12,34 +12,34 @@
     src: url('consolas.ttf') format('truetype');
 }
 
-body{
+body {
     font-family: consolas;
 }
 
-.light{
-    font-family: consolas;
-    color: aliceblue;
-}
-
-.lead{
+.light {
     font-family: consolas;
     color: aliceblue;
 }
 
-.card-hover-effect{
+.lead {
+    font-family: consolas;
+    color: aliceblue;
+}
+
+.card-hover-effect {
     backdrop-filter: blur(20px);
-    background-color: rbga(255,255,255,0.4);
+    background-color: rbga(255, 255, 255, 0.4);
     border-radius: 15px;
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     transition: transform 0.35s ease, box-shadow 0.3s ease;
 }
 
-.card-hover-effect:hover{
+.card-hover-effect:hover {
     transform: scale(1.03);
-    box-shadow: 0 10px 20px rbga(0,0,0,0.4);
+    box-shadow: 0 10px 20px rbga(0, 0, 0, 0.4);
 }
 
-.card-body{
+.card-body {
     padding: 30px;
 }
 
@@ -53,9 +53,10 @@ body{
 .card-text {
     font-family: consolas;
     text-align: left;
+    justify-content: center;
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 5px;
-    padding: 10px;
+    padding: 20px;
     margin-bottom: 10px;
     color: #333;
 }
@@ -65,9 +66,72 @@ body{
 }
 
 .card-text b {
-    color: #007bff; /* Bootstrap primary color */
+    color: #007bff;
+    /* Bootstrap primary color */
 }
 
-.hidden{
+.hidden {
     visibility: hidden;
+}
+
+.year {
+    font-family: consolas;
+    position: absolute;
+    left: -30px;
+    top: 10px;
+    transform: translate(-50%,-50%);
+    width: 100px;
+    height: 100px;
+    background-color: #fff;
+    border: 2px solid #000;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.projects-container {
+    position: relative;
+    padding-left: 60px;
+}
+
+.projects-container::before {
+    font-family: consolas;
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: #000;
+}
+
+.project-item {
+    position: relative;
+    padding-bottom: 30px;
+    margin-bottom: 50px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.project-item:nth-child(1) {
+    animation-delay: 0.3s;
+}
+
+.project-item:nth-child(2) {
+    animation-delay: 0.6s;
+}
+
+.project-item:nth-child(3) {
+    animation-delay: 0.9s;
 }
