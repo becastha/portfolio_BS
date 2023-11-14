@@ -18,7 +18,6 @@ body {
 }
 
 .card-hover-effect {
-    /* backdrop-filter: blur(0px); */
     background-color: rbga(255, 255, 255, 0.4);
     border-radius: 15px;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -58,7 +57,6 @@ body {
 
 .card-text b {
     color: #007bff;
-    /* Bootstrap primary color */
 }
 
 .hidden {
@@ -126,6 +124,22 @@ body {
 .project-item:nth-child(3) {
     animation-delay: 0.9s;
 }
+
+.project-item:nth-child(4) {
+    animation-delay: 0.3s;
+}
+.project-item:nth-child(5) {
+    animation-delay: 0.6s;
+}
+
+.project-item:nth-child(6) {
+    animation-delay: 0.9s;
+}
+
+.project-item:nth-child(7) {
+    animation-delay: 0.9s;
+}
+
 
 input[type=range] {
     -webkit-appearance: none;

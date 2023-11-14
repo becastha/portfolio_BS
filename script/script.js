@@ -43,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 });
 
-
 function displayProject(projects, append) {
     const container = document.querySelector('.projects-container');
     if (!append) {
@@ -64,7 +63,7 @@ function displayProject(projects, append) {
         container.insertAdjacentHTML('beforeend', projectElement);
     });
 }
-
+// skill viewer
 document.addEventListener('DOMContentLoaded', function () {
     fetch('./data/skills.json')
         .then(response => response.json())
@@ -75,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 var normalizedSkill = skill.replace(/\W/g, '');
                 var skillLevel = (skills[skill] === "Beginner") ? 1 : (skills[skill] === "Intermediate") ? 2 : 3;
         
-                var skillDiv = document.createElement('div');
+                var skillDiv = document.createElement('h4');
                 skillDiv.className = 'skill';
         
                 var label = document.createElement('label');
