@@ -63,6 +63,7 @@ function displayProject(projects, append) {
         container.insertAdjacentHTML('beforeend', projectElement);
     });
 }
+
 // skill viewer
 document.addEventListener('DOMContentLoaded', function () {
     fetch('./data/skills.json')
@@ -95,4 +96,41 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         .catch(error => console.log('Error loading the skills data:', error));
+});
+
+//working-experience viewer
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('./data/working_experience.json')
+        .then(response => response.json())
+        .then(workingExperiences => {
+            const container = document.querySelector('.experience-container');
+            workingExperiences.forEach(experience => {
+                const experienceElement = `
+                    <div class="mb-3 experience-item">
+                        <h4>${experience.year}</h4>
+                        <p><strong>Company:</strong> ${experience.office_name}</p>
+                        <p><strong>Role:</strong> ${experience.role}</p>
+                        <p><strong>Environment:</strong> ${experience.Environment}</p>
+                        <p><strong>Team Size:</strong> ${experience['Total member']}</p>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', experienceElement);
+            });
+        })
+        .catch(error => console.error('Error loading working experiences:', error));
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('./data/language.json')
+        .then(response => response.json())
+        .then(languages => {
+            const container = document.querySelector('.language-container');
+            languages.forEach(language => {
+                const languageElement = `
+                    <p>${language.language} - ${language.proficiency}</p>
+                `;
+                container.insertAdjacentHTML('beforeend', languageElement);
+            });
+        })
+        .catch(error => console.error('Error loading languages:', error));
 });

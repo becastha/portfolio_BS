@@ -55,7 +55,7 @@
         "teamSize": "1 people",
         "description": "mobile app that get news from the company's news portal which was made in wordpress"
     },{
-        "year": "2021",
+        "year": "2020",
         "title": "卒Aru CMS側　[Office Project]",
         "role": "Worked as a Backend Developer as well as a QA",
         "technologies": "php[laravel framework],,AWS[Ec2,Cognito,CloudFront,Aurora,Dynamodb]",

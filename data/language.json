@@ -1,0 +1,25 @@
+[
+    {
+        "language": "English",
+        "proficiency": "Fluent"
+    },
+    {
+        "language": "Japanese",
+        "proficiency": "Intermediate"
+    },
+    {
+        "language": "Nepali",
+        "proficiency": "Native"
+    },{
+        "language":"Hindi",
+        "proficiency": "Intermediate"
+    },
+    {
+        "language": "Newari",
+        "proficiency": "Native"
+    },
+    {
+        "language": "cestnia",
+        "proficiency": "Begineer"
+    }
+]
