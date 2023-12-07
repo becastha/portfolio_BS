@@ -168,3 +168,19 @@ input[type=range]::-webkit-slider-runnable-track {
 .skill{
     font-family: consolas;
 }
+
+body.dark-theme {
+    background-color: black;
+    color: white;
+}
+
+section {
+    transition: opacity 0.3s;
+    opacity: 0;
+}
+
+#theme-toggle {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
