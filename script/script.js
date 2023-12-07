@@ -134,3 +134,39 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => console.error('Error loading languages:', error));
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize theme
+    const themeToggleButton = document.createElement('button');
+    themeToggleButton.textContent = 'Go DARK';
+    themeToggleButton.id = 'theme-toggle';
+    document.body.appendChild(themeToggleButton);
+
+    // Handle theme toggle
+    themeToggleButton.addEventListener('click', () => {
+        if (document.body.classList.contains('dark-theme')) {
+            document.body.classList.remove('dark-theme');
+            document.body.style.cursor = 'default';
+        } else {
+            document.body.classList.add('dark-theme');
+            document.body.style.cursor = 'url("path_to_your_torch_cursor.png"), auto';
+        }
+    });
+
+    // Handle section click
+    document.querySelectorAll('section').forEach(section => {
+        section.addEventListener('click', (event) => {
+            event.stopPropagation();
+            document.querySelectorAll('section').forEach(s => s.style.opacity = '0');
+            section.style.opacity = '1';
+        });
+    });
+
+    // Reset on body click
+    document.body.addEventListener('click', () => {
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '1';
+        });
+    });
+});
