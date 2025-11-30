@@ -1,12 +1,51 @@
-[
-    
+[ 
+     {
+        "year": "2024",
+        "title": "Banking Application",
+        "role": "Working as a FullStack Developer",
+        "technologies": "Flutter",
+        "teamSize": "2 people",
+        "description": ""
+    },
+    {
+        "year": "2024",
+        "title": "Real-time Avatar rendering Application",
+        "role": "Working as a FullStack Developer",
+        "technologies": "Golang[fiber framework using REST API], Vuejs Framework, AWS[Ec2,Cognito,CloudFront,Aurora]",
+        "teamSize": "2 people",
+        "description": ""
+    },
+    {
+        "year": "2024",
+        "title": "Energy company app enhancement",
+        "role": "Working as a FullStack Developer",
+        "technologies": "Golang[fiber framework using REST API], Vuejs Framework, AWS[Ec2,Cognito,CloudFront,Aurora]",
+        "teamSize": "2 people",
+        "description": ""
+    },
+    {
+        "year": "2023-2024",
+        "title": "Database migration ",
+        "role": "Working as a FullStack Developer",
+        "technologies": "Golang[fiber framework using REST API], Vuejs Framework, AWS[Ec2,Cognito,CloudFront,Aurora]",
+        "teamSize": "2 people",
+        "description": ""
+    },
+    {
+        "year": "2023",
+        "title": "Fitness Application",
+        "role": "Working as a FullStack Developer",
+        "technologies": "Golang[fiber framework using REST API], Vuejs Framework, AWS[Ec2,Cognito,CloudFront,Aurora]",
+        "teamSize": "6 people",
+        "description": ""
+    },
     {
         "year": "2023",
         "title": "Novel Reader",
         "role": "Working as a FullStack Developer",
         "technologies": "Golang[fiber framework using REST API], Vuejs Framework, AWS[Ec2,Cognito,CloudFront,Aurora]",
         "teamSize": "2 people",
-        "description": "web-app for creating and reading Novels where a user can read japanese novel in horizontal or vertically with Ruby characters"
+        "description": ""
     },
     {
         "year": "2023",
