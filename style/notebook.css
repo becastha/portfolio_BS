@@ -1,0 +1,63 @@
+/*============= NOTEBOOK CONTAINER ============= */
+
+.notebook-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    height: 900px;
+    max-width: 90vw;
+    max-height: 85vh;
+    padding: 10px;
+    box-sizing: border-box;
+    perspective: 2000px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Notebook Base */
+#notebook {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    background: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.3),
+        0 10px 30px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    flex: 1;
+}
+
+/* Notebook edges for 3D effect */
+#notebook::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -5px;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(to right, #ccc, #ddd);
+    z-index: -1;
+}
+
+#notebook::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -5px;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(to left, #ccc, #ddd);
+    z-index: -1;
+}
+
+/* Paper Stack Effect (bottom edge) - REMOVED */

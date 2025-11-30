@@ -1,0 +1,146 @@
+/* ============= THEMES ============= */
+
+/* Default Theme - Already styled in other files */
+
+/* Dark Theme */
+body.dark-theme {
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+}
+
+body.dark-theme .page:not(.cover-page) {
+    background: linear-gradient(to bottom, #2a2a2a 0%, #1f1f1f 10%, #1f1f1f 90%, #1a1a1a 100%);
+}
+
+body.dark-theme .page-header,
+body.dark-theme .section h3,
+body.dark-theme .contact-item h4,
+body.dark-theme .project-card h3,
+body.dark-theme .skill-name,
+body.dark-theme .exp-card h3,
+body.dark-theme .lang-name,
+body.dark-theme .edu-item h4,
+body.dark-theme .thank-you-title {
+    color: #d4af37;
+}
+
+body.dark-theme .section p,
+body.dark-theme .contact-item p,
+body.dark-theme .project-card p,
+body.dark-theme .exp-card p,
+body.dark-theme .edu-item p,
+body.dark-theme .thank-you-subtitle {
+    color: #c9b896;
+}
+
+body.dark-theme .section,
+body.dark-theme .contact-item,
+body.dark-theme .project-card,
+body.dark-theme .skill-item,
+body.dark-theme .exp-card,
+body.dark-theme .lang-item,
+body.dark-theme .edu-item {
+    background: rgba(212, 175, 55, 0.1);
+    border-left-color: #d4af37;
+}
+
+body.dark-theme .section:hover,
+body.dark-theme .contact-item:hover,
+body.dark-theme .project-card:hover,
+body.dark-theme .skill-item:hover,
+body.dark-theme .exp-card:hover,
+body.dark-theme .lang-item:hover,
+body.dark-theme .edu-item:hover {
+    background: rgba(212, 175, 55, 0.15);
+}
+
+body.dark-theme .page-header {
+    border-bottom-color: #d4af37;
+}
+
+/* Rocketbook Theme */
+body.rocketbook-theme {
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+}
+
+body.rocketbook-theme .page:not(.cover-page) {
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 29px,
+            rgba(0, 150, 136, 0.1) 29px,
+            rgba(0, 150, 136, 0.1) 30px
+        ),
+        #fff;
+}
+
+body.rocketbook-theme .page.cover-page {
+    background: linear-gradient(135deg, #000 0%, #1a1a1a 50%, #000 100%);
+}
+
+body.rocketbook-theme .cover-label {
+    color: #00e676;
+    border-color: #00e676;
+    background: rgba(0, 230, 118, 0.1);
+}
+
+body.rocketbook-theme .cover-title {
+    color: #00e676;
+    text-shadow: 
+        0 0 20px rgba(0, 230, 118, 0.5),
+        2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+body.rocketbook-theme .cover-icon {
+    color: #00e676;
+}
+
+body.rocketbook-theme .spiral-coil,
+body.rocketbook-theme .spiral-coil::before {
+    background: 
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 8px,
+            #00e676 8px,
+            #00e676 12px,
+            transparent 12px,
+            transparent 20px
+        );
+}
+
+body.rocketbook-theme .section,
+body.rocketbook-theme .contact-item,
+body.rocketbook-theme .project-card,
+body.rocketbook-theme .skill-item,
+body.rocketbook-theme .exp-card,
+body.rocketbook-theme .lang-item,
+body.rocketbook-theme .edu-item {
+    border-left-color: #00e676;
+}
+
+body.rocketbook-theme .page-header {
+    border-bottom-color: #00e676;
+}
+
+body.rocketbook-theme .section h3 i,
+body.rocketbook-theme .contact-item i,
+body.rocketbook-theme .edu-item i {
+    color: #00e676;
+}
+
+/* Grid dots for Rocketbook theme */
+body.rocketbook-theme .page-content::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle, rgba(0, 150, 136, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+    opacity: 0.3;
+    z-index: 0;
+}

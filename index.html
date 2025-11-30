@@ -1,210 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Bikash Shrestha - Portfolio Notebook</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="style/base.css">
+    <link rel="stylesheet" href="style/notebook.css">
+    <link rel="stylesheet" href="style/spiral.css">
+    <link rel="stylesheet" href="style/pages.css">
+    <link rel="stylesheet" href="style/content.css">
+    <link rel="stylesheet" href="style/controls.css">
+    <link rel="stylesheet" href="style/settings.css">
+    <link rel="stylesheet" href="style/themes.css">
+    <link rel="stylesheet" href="style/responsive.css">
+    
+    <!-- External Libraries -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
-    <title>Bikash Shrestha</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
+<body class="serif-font">
+    
+    <!-- Settings Toggle Button -->
+    <button id="settings-toggle" title="Settings">
+        <i class="fas fa-cog"></i>
+    </button>
 
-<body>
-    <button id="theme-toggle" style="position: fixed; top: 10px; right: 10px;">Go Dark</button>
-
-    <header class="bg-dark text-center py-3">
-        <h1 class="display-4 light" id="blinking-name"> Bikash Shrestha</h1>
-        <p class="lead"> Backend Developer </p>
-        <p class="lead">Welcome to Nothing | click to find something | or Toggle to change </p>
-    </header>
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a href="#about" class="nav-link">About me</a>
-            </li>
-            <li class="nav-item">
-                <a href="#projects" class="nav-link">Projects</a>
-            </li>
-            <li>
-                <a href="#experience" class="nav-link">Experience</a>
-            </li>
-            <li>
-                <a href="#spokenLanguage" class="nav-link">Languages</a>
-            </li>
-            <li>
-                <a href="#Education" class="nav-link">Education</a>
-            </li>
-           
-        </ul>
+    <!-- Settings Panel -->
+    <div id="settings-panel" class="settings-panel">
+        <div class="settings-header">
+            <h3><i class="fas fa-palette"></i> Settings</h3>
+            <button id="close-settings" class="close-btn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="settings-section">
+            <label><i class="fas fa-adjust"></i> Theme</label>
+            <div class="theme-options">
+                <button class="theme-btn active" data-theme="default">
+                    <i class="fas fa-book"></i> Classic
+                </button>
+                <button class="theme-btn" data-theme="dark">
+                    <i class="fas fa-moon"></i> Dark
+                </button>
+                <button class="theme-btn" data-theme="rocketbook">
+                    <i class="fas fa-rocket"></i> Rocketbook
+                </button>
+            </div>
+        </div>
+        
+        <div class="settings-section">
+            <label><i class="fas fa-font"></i> Font Style</label>
+            <div class="font-options">
+                <button class="font-btn active" data-font="serif">
+                    <span style="font-family: Georgia;">Serif</span>
+                </button>
+                <button class="font-btn" data-font="sans">
+                    <span style="font-family: Arial;">Sans-Serif</span>
+                </button>
+                <button class="font-btn" data-font="mono">
+                    <span style="font-family: 'Courier New';">Monospace</span>
+                </button>
+            </div>
+        </div>
     </div>
-    </nav>
 
-    <section id="about" class="py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="card card-hover-effect ">
-                        <div class="card-body">
-                            <h2 class="card-title ">
-                                About Me
-                            </h2>
-                            <p class="card-text">
-                                <b> Languages :</b> Golang, PHP, Java, Nodejs ,JavaScript
-                            </p>
-                            <p class="card-text">
-                                <b>Framework:</b> Fiber, Express, Laravel, Spring
-                            </p>
-                            <p class="card-text">
-                                <b>Cloud: </b>AWS[Cognito, DynamoDb ,EC2 , CloudFront, lamda , S3Bucket], GCP
-                            </p>
-                            <p class="card-text">
-                                <b>Database : </b>Mysql ,SQLlite
-                            </p>
-                            <p class="card-text">
-                                <b>Comfortable OS : </b>linux[fedora, ubuntu],macOS,windows
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Contact -->
-                <div class="col-md-4">
-                    <div class="card card-hover-effect">
-                        <div class="card-body">
-                            <h2 class="card-title">
-                                Contact
-                            </h2>
-                            <p class="card-text">
-                                <i class="fas fa-map-marker-alt">
-                                </i>
-                                Yokohama ,Kanagawa, Japan<br>
-                                　　横浜市、神奈川県、日本
-                            </p>
-                            <p class="card-text">
-                                <i class="fas fa-envelope">
-                                </i>
-                                becas4th@icloud.com
-                            </p>
-                            <p class="card-text">
-                                <i class="fab fa-github"></i>
-                                https://github.com/becastha
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Notebook Container -->
+    <div class="notebook-container">
+        
+        <!-- Spiral Binding -->
+        <div class="spiral-binding">
+            <div class="spiral-coil"></div>
         </div>
-    </section>
-
-    <!-- Projects -->
-
-    <section id="projects" class="py-4">
-        <div class="container">
-            <div class="row">
-                <div class="card card-hover-effect">
-                    <div class="card-body">
-                        <h2 class="card-title">
-                            Projects
-                        </h2>
-                        <hr>
-                        <div class="projects-container"></div>
-                        <button id="loadMore">See More</button>
-                    </div>
-                </div>
-
-            </div>
+        
+        <!-- Notebook -->
+        <div id="notebook">
+                      
         </div>
-    </section>
 
-    <!-- Skills -->
-    <section class="py-4" id="skills">
-        <div class="container">
-            <div class="row">
-                <div class="card card-hover-effect">
-                    <div class="card-body">
-                        <h2 class="card-title">Skills</h2>
-                        <div class="row">
-                            <div class="col-md-4 text-left">
-                                <h6>Learning Phase</h6>
-                            </div>
-                            <div class="col-md-4 text-center">
-                                <h6>Intermediate (^_-)-☆</h6>
-                            </div>
-                            <div class="col-md-4 text-right">
-                                <h6>Pro [I need to be better]</h6>
-                            </div>
-                        </div>
-                        <div class="skills-container">
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- Controls -->
+        <div class="controls">
+            <button id="btn-first" title="First Page">
+                <i class="fas fa-step-backward"></i>
+            </button>
+            <button id="btn-prev" title="Previous Page">
+                <i class="fas fa-chevron-up"></i>
+            </button>
+            <span class="page-display">
+                Page <span id="current-page">1</span> / <span id="total-pages">6</span>
+            </span>
+            <button id="btn-next" title="Next Page">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <button id="btn-last" title="Last Page">
+                <i class="fas fa-step-forward"></i>
+            </button>
+            <div class="control-spacer"></div>
+            <button id="btn-zoom-in" title="Zoom In">
+                <i class="fas fa-search-plus"></i>
+            </button>
+            <button id="btn-zoom-out" title="Zoom Out">
+                <i class="fas fa-search-minus"></i>
+            </button>
+            <button id="btn-fullscreen" title="Fullscreen">
+                <i class="fas fa-expand"></i>
+            </button>
+            <button id="btn-sound" title="Toggle Sound">
+                <i class="fas fa-volume-up"></i>
+            </button>
         </div>
-    </section>
-    <!-- Working Experience -->
-    <section class="py-4" id="working-experience">
-        <div class="container">
-            <div class="row">
-                <div class="card card-hover-effect">
-                    <div class="card-body">
-                        <h2 class="card-title">Working Experience</h2>
-                        <div class="experience-container"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Speaking Language -->
-    <section class="py-4" id="spokenLanguage">
-        <div class="container">
-            <div class="row">
-                <div class="card card-hover-effect">
-                    <div class="card-body">
-                        <h2 class="card-title">Language</h2>
-                        <div class="language-container"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>    
-    <!-- Education -->
-    <section class="py-4" id="Education">
-        <div class="container">
-            <div class="row">
-                <div class="card card-hover-effect">
-                    <div class="card-body">
-                        <div class="card-title">
-                            <h2>Education</h2>
-                            <p class="card-text">
-                                <b> University :</b> Sikkim Manipal University
-                            </p>
-                            <p class="card-text">
-                                <b> Language School :</b> ACC 国際交流学園（日本語学校） 
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
 
+    <!-- Particles Background -->
+    <div id="particles-bg"></div>
+
+    <!-- JavaScript Modules -->
+    <script src="script/state.js"></script>
+    <script src="script/page-flip.js"></script>
+    <script src="script/navigation.js"></script>
+    <script src="script/controls.js"></script>
+    <script src="script/settings.js"></script>
+    <script src="script/theme.js"></script>
+    <script src="script/data-loader.js"></script>
+    <script src="script/keyboard.js"></script>
+    <script src="script/touch.js"></script>
+    <script src="script/sound.js"></script>
+    <script src="script/particles.js"></script>
+    <script src="script/init.js"></script>
 </body>
-
 </html>
-<script src="script/script.js">
-
-</script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-715FDVXX5Z"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-715FDVXX5Z');
-</script>
-

@@ -1,14 +1,21 @@
 [
     {
-        "year": "2020-present",
-        "office_name": "Uetomae Co. LTD[株式会社ウエトマエ]",
+        "year": "2023present",
+        "office_name": "System I co. Ltd [株式会社システムアイ]",
+        "role": "Developer",
+        "Environment":"Flutter,Git,AWS,Golang,GCP,Jira",
+        "Total member": "400+ people"
+    },
+    {
+        "year": "2020-2023",
+        "office_name": "Uetomae Co. LTD [株式会社ウエトマエ]",
         "role": "Developer",
         "Environment":"php[Laravel],Vuejs,Git,AWS,Golang,Linux[Amazon linux,CentOS],Docker,Windows,Slack,Trello,Jira",
-        "Total member": "6 people"
+        "Total member": "6 people [Have the child company in vietnam]"
     },
     {
         "year": "2019-2020",
-        "office_name": "WebGroup Co. LTD[ウエブグループ株式会社]",
+        "office_name": "WebGroup Co. LTD [ウエブグループ株式会社]",
         "role": "Assigned in NTT Data as a developer「NTTデータへ開発者として配属」 ",
         "Environment":"C,Java,Linux,TortoiseSVN",
         "Total member": "1 Team-25 people"
