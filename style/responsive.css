@@ -7,64 +7,64 @@
         height: 75vh;
         max-height: 75vh;
     }
-    
+
     .page-content {
         padding: 40px 30px 50px 30px;
     }
-    
+
     .page-header {
         font-size: 2rem;
         margin-bottom: 20px;
     }
-    
+
     .cover-title {
         font-size: 2.5rem;
     }
-    
+
     .cover-subtitle {
         font-size: 1.2rem;
     }
-    
+
     .cover-icon {
         font-size: 3rem;
     }
-    
+
     .section {
         padding: 14px;
         margin-bottom: 18px;
     }
-    
+
     .section h3 {
         font-size: 1.1rem;
     }
-    
+
     .project-card,
     .exp-card {
         padding: 16px;
         margin-bottom: 18px;
     }
-    
+
     .contact-item,
     .edu-item {
         padding: 14px;
         gap: 12px;
     }
-    
+
     .controls {
         padding: 12px 18px;
         gap: 8px;
         flex-wrap: wrap;
     }
-    
+
     .controls button {
         padding: 8px 12px;
     }
-    
+
     .page-display {
         min-width: 80px;
         font-size: 0.9rem;
     }
-    
+
     .spiral-binding {
         top: -30px;
         height: 25px;
@@ -80,216 +80,219 @@
         padding: 0 10px;
         box-sizing: border-box;
     }
-    
+
     #notebook {
         border-radius: 4px;
         max-width: 100%;
         width: calc(100vw - 20px);
         height: 100%;
     }
-    
+
     .page {
         border-radius: 4px;
     }
-    
+
     .page-content {
         padding: 30px 20px 40px 20px;
     }
-    
+
     .page-header {
         font-size: 1.6rem;
         margin-bottom: 18px;
         padding-bottom: 10px;
     }
-    
+
     .cover-content {
         padding: 40px 20px;
     }
-    
+
     .cover-label {
         font-size: 0.7rem;
         letter-spacing: 2px;
         padding: 4px 12px;
         margin-bottom: 20px;
     }
-    
+
     .cover-title {
         font-size: 2rem;
         margin-bottom: 10px;
     }
-    
+
     .cover-subtitle {
         font-size: 1rem;
         margin-bottom: 25px;
     }
-    
+
     .cover-icon {
         font-size: 2.5rem;
         margin: 20px 0;
     }
-    
+
     .cover-location {
         font-size: 0.85rem;
     }
-    
+
     .section {
         padding: 12px;
         margin-bottom: 15px;
     }
-    
+
     .section h3 {
         font-size: 1rem;
         gap: 8px;
     }
-    
+
     .section h3 i {
         font-size: 1rem;
     }
-    
+
     .section p {
         font-size: 0.9rem;
     }
-    
+
     .skills-legend {
         gap: 12px;
         font-size: 0.8rem;
         padding: 10px 12px;
     }
-    
+
     .dot {
         width: 10px;
         height: 10px;
     }
-    
+
     .skill-item {
         padding: 8px 10px;
         margin-bottom: 5px;
     }
-    
+
     .skill-name {
         font-size: 0.9rem;
     }
-    
+
     .skill-level {
         width: 8px;
         height: 8px;
     }
-    
+
     .project-card,
     .exp-card {
         padding: 12px;
         margin-bottom: 15px;
     }
-    
+
     .project-card h3,
     .exp-card h3 {
         font-size: 1rem;
         margin-bottom: 8px;
     }
-    
+
     .project-card p,
     .exp-card p {
         font-size: 0.85rem;
     }
-    
+
     .project-year,
     .exp-year {
         font-size: 0.7rem;
         padding: 3px 10px;
     }
-    
+
     .contact-item,
     .edu-item {
         padding: 12px;
         gap: 10px;
         flex-direction: row;
     }
-    
+
     .contact-item i,
     .edu-item i {
         font-size: 1.5rem;
     }
-    
+
     .contact-item h4,
     .edu-item h4 {
         font-size: 0.95rem;
     }
-    
+
     .contact-item p,
     .edu-item p {
         font-size: 0.85rem;
     }
-    
+
     .lang-item {
         padding: 10px 12px;
     }
-    
+
     .lang-name {
         font-size: 0.9rem;
     }
-    
+
     .lang-prof {
         font-size: 0.8rem;
     }
-    
+
     .thank-you-title {
         font-size: 2rem;
     }
-    
+
     .thank-you-subtitle {
         font-size: 1rem;
     }
-    
+
     .social-links a {
         width: 40px;
         height: 40px;
         font-size: 1.1rem;
+        pointer-events: auto;
+        cursor: pointer;
+        position: relative;
     }
-    
+
     .page-number {
         bottom: 20px;
         right: 25px;
         font-size: 0.8rem;
     }
-    
+
     .controls {
         width: calc(100vw - 40px);
         padding: 10px 12px;
         gap: 6px;
         justify-content: center;
     }
-    
+
     .controls button {
         padding: 8px 10px;
         min-width: 35px;
     }
-    
+
     .controls button i {
         font-size: 0.9rem;
     }
-    
+
     .page-display {
         font-size: 0.85rem;
         min-width: 70px;
         padding: 0 6px;
     }
-    
+
     .control-spacer {
         height: 20px;
     }
-    
+
     .spiral-binding {
         top: -25px;
         height: 20px;
         width: calc(100% - 40px);
     }
-    
+
     #settings-toggle {
         width: 45px;
         height: 45px;
         font-size: 1rem;
     }
-    
+
     .settings-panel {
         width: 280px;
     }
@@ -300,19 +303,19 @@
     .cover-title {
         font-size: 1.6rem;
     }
-    
+
     .page-header {
         font-size: 1.4rem;
     }
-    
+
     .section h3 {
         font-size: 0.95rem;
     }
-    
+
     .controls {
         padding: 8px 10px;
     }
-    
+
     .controls button {
         padding: 6px 8px;
         min-width: 30px;
@@ -324,19 +327,19 @@
     .notebook-container {
         height: 85vh;
     }
-    
+
     .page-content {
         padding: 20px 30px 30px 30px;
     }
-    
+
     .cover-content {
         padding: 30px;
     }
-    
+
     .cover-title {
         font-size: 2rem;
     }
-    
+
     .cover-icon {
         font-size: 2rem;
         margin: 15px 0;
