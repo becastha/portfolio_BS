@@ -42,15 +42,15 @@ const Particles = {
             
             this.camera.position.z = 50;
             
-            // Create star field background
+            // Create star field background with TINY dots
             this.createStarField();
             
             // Create multiple shooting stars
-            this.createShootingStar(0xffffff, -80, 60, 1.8);   // White fast
-            this.createShootingStar(0xaaccff, -60, 30, 1.5);   // Blue medium
-            this.createShootingStar(0xffffaa, -90, 0, 2.0);    // Yellow fast
-            this.createShootingStar(0xffccaa, -50, -20, 1.3);  // Orange slow
-            this.createShootingStar(0xccffff, -70, -40, 1.6);  // Cyan medium
+            this.createShootingStar(0xffffff, -60, 50, 2.2);   // White fast
+            this.createShootingStar(0xaaddff, -80, 30, 1.8);   // Blue medium
+            this.createShootingStar(0xffffaa, -50, 10, 2.5);   // Yellow very fast
+            this.createShootingStar(0xffddaa, -90, -10, 1.5);  // Orange slow
+            this.createShootingStar(0xccffff, -70, -30, 2.0);  // Cyan fast
             
             // Start animation
             this.animate();
@@ -64,86 +64,92 @@ const Particles = {
         }
     },
     
-    // Create background star field
+    // Create background star field - FIXED to show tiny dots
     createStarField: function() {
         const starGeometry = new THREE.BufferGeometry();
-        const starCount = 300;
+        const starCount = 400;
         const positions = new Float32Array(starCount * 3);
-        const colors = new Float32Array(starCount * 3);
-        const sizes = new Float32Array(starCount);
         
         for (let i = 0; i < starCount; i++) {
-            // Random positions
+            // Spread stars across the whole screen
             positions[i * 3] = (Math.random() - 0.5) * 200;      // x
             positions[i * 3 + 1] = (Math.random() - 0.5) * 200;  // y
             positions[i * 3 + 2] = (Math.random() - 0.5) * 100;  // z
-            
-            // Slight color variation (white to pale blue)
-            const colorVariation = 0.8 + Math.random() * 0.2;
-            colors[i * 3] = colorVariation;                       // r
-            colors[i * 3 + 1] = colorVariation;                   // g
-            colors[i * 3 + 2] = 0.9 + Math.random() * 0.1;       // b (slightly blue)
-            
-            // Random sizes
-            sizes[i] = Math.random() * 2 + 0.5;
         }
         
         starGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        starGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-        starGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
         
+        // FIXED: Use smaller size and proper point rendering
         const starMaterial = new THREE.PointsMaterial({
-            size: 1.5,
-            vertexColors: true,
+            color: 0xffffff,
+            size: 0.8,  // MUCH smaller!
             transparent: true,
-            opacity: 0.9,
+            opacity: 0.8,
+            sizeAttenuation: true,  // Points get smaller with distance
+            map: this.createCircleTexture(),  // Use circular texture instead of squares
             blending: THREE.AdditiveBlending,
-            sizeAttenuation: true
+            depthWrite: false
         });
         
         this.starField = new THREE.Points(starGeometry, starMaterial);
         this.scene.add(this.starField);
     },
     
+    // Create circular texture for stars (no more squares!)
+    createCircleTexture: function() {
+        const canvas = document.createElement('canvas');
+        canvas.width = 32;
+        canvas.height = 32;
+        
+        const ctx = canvas.getContext('2d');
+        const gradient = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+        gradient.addColorStop(0, 'rgba(255,255,255,1)');
+        gradient.addColorStop(0.2, 'rgba(255,255,255,1)');
+        gradient.addColorStop(0.4, 'rgba(255,255,255,0.5)');
+        gradient.addColorStop(1, 'rgba(255,255,255,0)');
+        
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, 32, 32);
+        
+        const texture = new THREE.Texture(canvas);
+        texture.needsUpdate = true;
+        return texture;
+    },
+    
     // Create a shooting star
     createShootingStar: function(color, startX, startY, speed) {
         const group = new THREE.Group();
         
-        // Create the bright head of the shooting star
-        const headGeometry = new THREE.SphereGeometry(0.3, 8, 8);
+        // Create the bright head (glowing sphere)
+        const headGeometry = new THREE.SphereGeometry(0.4, 16, 16);
         const headMaterial = new THREE.MeshBasicMaterial({
             color: color,
             transparent: true,
             opacity: 1
         });
         const head = new THREE.Mesh(headGeometry, headMaterial);
+        group.add(head);
         
-        // Add glow around the head
-        const glowGeometry = new THREE.SphereGeometry(0.6, 8, 8);
+        // Add outer glow
+        const glowGeometry = new THREE.SphereGeometry(0.8, 16, 16);
         const glowMaterial = new THREE.MeshBasicMaterial({
             color: color,
             transparent: true,
-            opacity: 0.3,
+            opacity: 0.4,
             blending: THREE.AdditiveBlending
         });
         const glow = new THREE.Mesh(glowGeometry, glowMaterial);
-        
-        group.add(head);
         group.add(glow);
         
-        // Create the glowing tail
+        // Create the glowing tail trail
         const trailGeometry = new THREE.BufferGeometry();
-        const trailPoints = 40;
+        const trailPoints = 50;
         const trailPositions = new Float32Array(trailPoints * 3);
-        const trailOpacities = new Float32Array(trailPoints);
         
         for (let i = 0; i < trailPoints; i++) {
-            trailPositions[i * 3] = -i * 0.5;      // x (behind the head)
-            trailPositions[i * 3 + 1] = i * 0.05;  // y (slight curve)
+            trailPositions[i * 3] = -i * 0.8;      // x (behind the head)
+            trailPositions[i * 3 + 1] = i * 0.1;   // y (slight curve downward)
             trailPositions[i * 3 + 2] = 0;         // z
-            
-            // Fade out towards the tail
-            trailOpacities[i] = 1 - (i / trailPoints);
         }
         
         trailGeometry.setAttribute('position', new THREE.BufferAttribute(trailPositions, 3));
@@ -151,43 +157,42 @@ const Particles = {
         const trailMaterial = new THREE.LineBasicMaterial({
             color: color,
             transparent: true,
-            opacity: 0.8,
-            linewidth: 3,
+            opacity: 0.7,
+            linewidth: 2,
             blending: THREE.AdditiveBlending
         });
         
         const trail = new THREE.Line(trailGeometry, trailMaterial);
         group.add(trail);
         
-        // Add sparkle particles along the trail
+        // Add sparkle particles (using circle texture to avoid squares)
         const sparkleGeometry = new THREE.BufferGeometry();
-        const sparkleCount = 20;
+        const sparkleCount = 30;
         const sparklePositions = new Float32Array(sparkleCount * 3);
-        const sparkleSizes = new Float32Array(sparkleCount);
         
         for (let i = 0; i < sparkleCount; i++) {
-            sparklePositions[i * 3] = -Math.random() * 15;           // x (behind)
-            sparklePositions[i * 3 + 1] = (Math.random() - 0.5) * 2; // y (spread)
-            sparklePositions[i * 3 + 2] = (Math.random() - 0.5) * 2; // z (spread)
-            sparkleSizes[i] = Math.random() * 3 + 1;
+            sparklePositions[i * 3] = -Math.random() * 20;           // x (behind)
+            sparklePositions[i * 3 + 1] = (Math.random() - 0.5) * 3; // y (spread)
+            sparklePositions[i * 3 + 2] = (Math.random() - 0.5) * 3; // z (spread)
         }
         
         sparkleGeometry.setAttribute('position', new THREE.BufferAttribute(sparklePositions, 3));
-        sparkleGeometry.setAttribute('size', new THREE.BufferAttribute(sparkleSizes, 1));
         
         const sparkleMaterial = new THREE.PointsMaterial({
             color: color,
-            size: 2,
+            size: 1.5,  // Smaller sparkles
             transparent: true,
-            opacity: 0.7,
+            opacity: 0.8,
+            sizeAttenuation: true,
+            map: this.createCircleTexture(),  // Use circle texture
             blending: THREE.AdditiveBlending,
-            sizeAttenuation: true
+            depthWrite: false
         });
         
         const sparkles = new THREE.Points(sparkleGeometry, sparkleMaterial);
         group.add(sparkles);
         
-        // Position the shooting star group
+        // Position the shooting star
         group.position.set(startX, startY, Math.random() * 20 - 10);
         
         // Store animation data
@@ -196,7 +201,7 @@ const Particles = {
             speed: speed,
             velocity: {
                 x: speed,
-                y: -speed * 0.3  // Downward diagonal motion
+                y: -speed * 0.4  // Downward diagonal
             },
             startX: startX,
             startY: startY,
@@ -204,7 +209,7 @@ const Particles = {
             glow: glow,
             trail: trail,
             sparkles: sparkles,
-            lifespan: Math.random() * 2 + 3,  // 3-5 seconds
+            lifespan: Math.random() * 3 + 4,  // 4-7 seconds
             age: 0,
             twinkle: Math.random() * Math.PI * 2
         };
@@ -218,87 +223,86 @@ const Particles = {
         requestAnimationFrame(() => this.animate());
         
         const time = Date.now() * 0.001;
-        const deltaTime = 0.016; // ~60fps
+        const deltaTime = 0.016;
         
         // Animate shooting stars
         this.shootingStars.forEach((star, index) => {
-            // Move the star
+            // Move the star diagonally
             star.position.x += star.userData.velocity.x;
             star.position.y += star.userData.velocity.y;
             
-            // Age the star
+            // Age tracking
             star.userData.age += deltaTime;
             
-            // Reset position when off screen or too old
-            if (star.position.x > 100 || star.position.y < -80 || star.userData.age > star.userData.lifespan) {
+            // Reset when off screen or too old
+            if (star.position.x > 100 || star.position.y < -100 || star.userData.age > star.userData.lifespan) {
                 star.position.x = -80 - Math.random() * 40;
                 star.position.y = 60 + Math.random() * 40;
                 star.position.z = Math.random() * 20 - 10;
                 star.userData.age = 0;
-                star.userData.lifespan = Math.random() * 2 + 3;
+                star.userData.lifespan = Math.random() * 3 + 4;
             }
             
-            // Twinkle effect on the head
+            // Twinkle the head
             if (star.userData.head) {
-                const twinkle = Math.sin(time * 10 + star.userData.twinkle) * 0.3 + 0.7;
+                const twinkle = Math.sin(time * 12 + star.userData.twinkle) * 0.2 + 0.8;
                 star.userData.head.material.opacity = twinkle;
-                star.userData.glow.material.opacity = twinkle * 0.3;
+                star.userData.glow.material.opacity = twinkle * 0.4;
+                
+                // Pulse the glow
+                const pulse = Math.sin(time * 8 + index) * 0.1 + 1;
+                star.userData.glow.scale.set(pulse, pulse, pulse);
             }
             
-            // Update trail with smooth curve
+            // Animate trail with smooth wave
             if (star.userData.trail) {
                 const positions = star.userData.trail.geometry.attributes.position.array;
                 for (let i = 0; i < positions.length; i += 3) {
                     const idx = i / 3;
-                    positions[i] = -idx * 0.5;                           // x (straight back)
-                    positions[i + 1] = idx * 0.05 + Math.sin(time * 2 + idx * 0.1) * 0.3;  // y (wavy)
-                    positions[i + 2] = Math.sin(time * 3 + idx * 0.2) * 0.2;  // z (slight wave)
+                    positions[i] = -idx * 0.8;
+                    positions[i + 1] = idx * 0.1 + Math.sin(time * 3 + idx * 0.15) * 0.5;
+                    positions[i + 2] = Math.cos(time * 2 + idx * 0.1) * 0.3;
                 }
                 star.userData.trail.geometry.attributes.position.needsUpdate = true;
                 
-                // Fade trail based on age
-                const fadeFactor = 1 - (star.userData.age / star.userData.lifespan);
-                star.userData.trail.material.opacity = 0.8 * fadeFactor;
+                // Fade trail over lifetime
+                const fadeFactor = 1 - (star.userData.age / star.userData.lifespan * 0.3);
+                star.userData.trail.material.opacity = 0.7 * fadeFactor;
             }
             
-            // Animate sparkles
+            // Animate sparkles orbiting along the trail
             if (star.userData.sparkles) {
                 const sparklePositions = star.userData.sparkles.geometry.attributes.position.array;
                 for (let i = 0; i < sparklePositions.length; i += 3) {
                     const idx = i / 3;
-                    const offset = time * 2 + idx * 0.5;
+                    const offset = time * 3 + idx * 0.8;
+                    const distance = idx * 0.7;
                     
-                    sparklePositions[i] = -Math.random() * 15;                        // x (random along trail)
-                    sparklePositions[i + 1] = Math.sin(offset) * 1.5;                 // y (wave)
-                    sparklePositions[i + 2] = Math.cos(offset) * 1.5;                 // z (circular)
+                    sparklePositions[i] = -distance - Math.cos(offset) * 1;
+                    sparklePositions[i + 1] = Math.sin(offset) * 2;
+                    sparklePositions[i + 2] = Math.cos(offset + 1) * 2;
                 }
                 star.userData.sparkles.geometry.attributes.position.needsUpdate = true;
                 
-                // Pulse sparkles opacity
-                star.userData.sparkles.material.opacity = 0.4 + Math.sin(time * 5) * 0.3;
+                // Pulse opacity
+                star.userData.sparkles.material.opacity = 0.5 + Math.sin(time * 6 + index) * 0.3;
             }
         });
         
-        // Twinkle background stars
+        // Gentle twinkle on background stars
         if (this.starField) {
             const positions = this.starField.geometry.attributes.position.array;
-            const sizes = this.starField.geometry.attributes.size.array;
             
             for (let i = 0; i < positions.length; i += 3) {
                 const idx = i / 3;
-                // Subtle z-axis movement for depth
-                positions[i + 2] = Math.sin(time * 0.5 + idx * 0.1) * 50;
-                
-                // Twinkle size
-                const baseSizes = 0.5 + (idx % 3) * 0.5;
-                sizes[idx] = baseSizes + Math.sin(time * 3 + idx) * 0.3;
+                // Very subtle z movement for depth
+                positions[i + 2] += Math.sin(time * 0.3 + idx * 0.05) * 0.02;
             }
             
             this.starField.geometry.attributes.position.needsUpdate = true;
-            this.starField.geometry.attributes.size.needsUpdate = true;
             
-            // Slowly rotate the star field
-            this.starField.rotation.z += 0.0001;
+            // Very slow rotation for dynamic feel
+            this.starField.rotation.z += 0.00005;
         }
         
         if (this.renderer && this.scene && this.camera) {
