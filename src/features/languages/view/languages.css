@@ -1,0 +1,30 @@
+/* ============= LANGUAGES ============= */
+
+.lang-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px;
+    margin-bottom: 10px;
+    background: rgba(139, 115, 85, 0.08);
+    border-radius: 6px;
+    border-left: 4px solid #8b7355;
+    transition: all 0.2s ease;
+}
+
+.lang-item:hover {
+    background: rgba(139, 115, 85, 0.12);
+    transform: translateX(4px);
+}
+
+.lang-name {
+    font-weight: 600;
+    color: #2d1810;
+    font-size: 1rem;
+}
+
+.lang-prof {
+    color: #8b7355;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+

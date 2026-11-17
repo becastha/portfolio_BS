@@ -3,131 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bikash Shrestha - Portfolio Notebook</title>
-    
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="style/base.css">
-    <link rel="stylesheet" href="style/notebook.css">
-    <link rel="stylesheet" href="style/spiral.css">
-    <link rel="stylesheet" href="style/pages.css">
-    <link rel="stylesheet" href="style/content.css">
-    <link rel="stylesheet" href="style/controls.css">
-    <link rel="stylesheet" href="style/settings.css">
-    <link rel="stylesheet" href="style/themes.css">
-    <link rel="stylesheet" href="style/responsive.css">
-    
-    <!-- External Libraries -->
+    <title data-i18n="app.title"></title>
+
+    <!-- One page drawn like an old ink-on-paper architectural sheet.
+         profile.css only supplies the letter-by-letter mechanics of the name; every look is in manuscript.css. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Yatra+One&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="src/features/profile/view/profile.css">
+    <link rel="stylesheet" href="src/shared/styles/manuscript.css">
+    <link rel="stylesheet" href="src/features/skyline/view/skyline.css">
 </head>
-<body class="serif-font">
-    
-    <!-- Settings Toggle Button -->
-    <button id="settings-toggle" title="Settings">
-        <i class="fas fa-cog"></i>
-    </button>
+<body>
 
-    <!-- Settings Panel -->
-    <div id="settings-panel" class="settings-panel">
-        <div class="settings-header">
-            <h3><i class="fas fa-palette"></i> Settings</h3>
-            <button id="close-settings" class="close-btn">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        
-        <div class="settings-section">
-            <label><i class="fas fa-adjust"></i> Theme</label>
-            <div class="theme-options">
-                <button class="theme-btn active" data-theme="default">
-                    <i class="fas fa-book"></i> Classic
-                </button>
-                <button class="theme-btn" data-theme="dark">
-                    <i class="fas fa-moon"></i> Dark
-                </button>
-                <button class="theme-btn" data-theme="rocketbook">
-                    <i class="fas fa-rocket"></i> Rocketbook
-                </button>
+    <!-- Line art reused on the sheet, and the filter that makes drawn lines wobble like a pen -->
+    <svg class="ink-defs" aria-hidden="true">
+        <defs>
+            <filter id="ink-wobble" x="-5%" y="-5%" width="110%" height="110%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="noise"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.2"/>
+            </filter>
+
+            <!-- A pillar: crowned finial, bowl capital, bracket, shaft -->
+            <symbol id="pillar" viewBox="0 0 120 320">
+                <rect x="38" y="4" width="46" height="46"/>
+                <path d="M45 46 V22 L53 10 L61 24 L69 10 L77 22 V46"/>
+                <path d="M55 46 V30 H67 V46"/>
+                <rect x="28" y="50" width="66" height="10"/>
+                <path d="M2 60 H116 L107 88 H12 Z"/>
+                <path d="M10 64 Q22 82 40 66"/>
+                <path d="M12 88 H107 V96 H12 Z"/>
+                <path d="M20 96 H100 Q96 118 78 120 H42 Q24 118 20 96 Z"/>
+                <rect x="38" y="120" width="46" height="10"/>
+                <path d="M45 130 V320 M77 130 V320"/>
+            </symbol>
+        </defs>
+    </svg>
+
+    <main class="sheet" data-ink-box="top left right" data-ink-double="left right">
+        <p class="sheet-caption" data-i18n="app.title"></p>
+
+        <!-- Two pillars carrying the name panel -->
+        <section class="shrine">
+            <svg class="pillar ink-drawing" aria-hidden="true"><use href="#pillar"/></svg>
+            <div class="shrine-panel" data-ink-box="left bottom right">
+                <div class="cover-content" id="profile-container"></div>
             </div>
-        </div>
-        
-        <div class="settings-section">
-            <label><i class="fas fa-font"></i> Font Style</label>
-            <div class="font-options">
-                <button class="font-btn active" data-font="serif">
-                    <span style="font-family: Georgia;">Serif</span>
-                </button>
-                <button class="font-btn" data-font="sans">
-                    <span style="font-family: Arial;">Sans-Serif</span>
-                </button>
-                <button class="font-btn" data-font="mono">
-                    <span style="font-family: 'Courier New';">Monospace</span>
-                </button>
-            </div>
-        </div>
-    </div>
+            <svg class="pillar pillar--mirrored ink-drawing" aria-hidden="true"><use href="#pillar"/></svg>
+        </section>
 
-    <!-- Notebook Container -->
-    <div class="notebook-container">
-        
-        <!-- Spiral Binding -->
-        <div class="spiral-binding">
-            <div class="spiral-coil"></div>
-        </div>
-        
-        <!-- Notebook -->
-        <div id="notebook">
-                      
-        </div>
+        <!-- The stepped plinth the pillars stand on -->
+        <svg class="plinth ink-drawing" viewBox="0 0 800 92" preserveAspectRatio="none" aria-hidden="true">
+            <rect x="120" y="4" width="560" height="10"/>
+            <rect x="104" y="14" width="592" height="10"/>
+            <path d="M72 52 V38 Q72 24 100 24 H700 Q728 24 728 38 V52 Z"/>
+            <rect x="44" y="52" width="712" height="12"/>
+            <rect x="20" y="64" width="760" height="24"/>
+        </svg>
 
-        <!-- Controls -->
-        <div class="controls">
-            <button id="btn-first" title="First Page">
-                <i class="fas fa-step-backward"></i>
-            </button>
-            <button id="btn-prev" title="Previous Page">
-                <i class="fas fa-chevron-up"></i>
-            </button>
-            <span class="page-display">
-                Page <span id="current-page">1</span> / <span id="total-pages">6</span>
-            </span>
-            <button id="btn-next" title="Next Page">
-                <i class="fas fa-chevron-down"></i>
-            </button>
-            <button id="btn-last" title="Last Page">
-                <i class="fas fa-step-forward"></i>
-            </button>
-            <div class="control-spacer"></div>
-            <button id="btn-zoom-in" title="Zoom In">
-                <i class="fas fa-search-plus"></i>
-            </button>
-            <button id="btn-zoom-out" title="Zoom Out">
-                <i class="fas fa-search-minus"></i>
-            </button>
-            <button id="btn-fullscreen" title="Fullscreen">
-                <i class="fas fa-expand"></i>
-            </button>
-            <button id="btn-sound" title="Toggle Sound">
-                <i class="fas fa-volume-up"></i>
-            </button>
-        </div>
-    </div>
+        <!-- The chamber under the plinth -->
+        <section class="chamber" data-ink-box="top right bottom left">
+            <div id="overview-container"></div>
+        </section>
 
-    <!-- Particles Background -->
-    <div id="particles-bg"></div>
+        <div class="fold" aria-hidden="true"></div>
 
-    <!-- JavaScript Modules -->
-    <script src="script/state.js"></script>
-    <script src="script/page-flip.js"></script>
-    <script src="script/navigation.js"></script>
-    <script src="script/controls.js"></script>
-    <script src="script/settings.js"></script>
-    <script src="script/theme.js"></script>
-    <script src="script/data-loader.js"></script>
-    <script src="script/keyboard.js"></script>
-    <script src="script/touch.js"></script>
-    <script src="script/sound.js"></script>
-    <script src="script/particles.js"></script>
-    <script src="script/init.js"></script>
+        <section class="ledger">
+            <article class="ledger-box ledger-box--wide" data-ink-box="top right bottom left">
+                <h2 class="ledger-label" data-i18n="projects.header"></h2>
+                <div id="projects-container"></div>
+            </article>
+
+            <article class="ledger-box" data-ink-box="top right bottom left">
+                <h2 class="ledger-label" data-i18n="skills.header"></h2>
+                <div class="skills-legend">
+                    <span><span class="dot beginner"></span> <span data-i18n="skills.legend.beginner"></span></span>
+                    <span><span class="dot intermediate"></span> <span data-i18n="skills.legend.intermediate"></span></span>
+                    <span><span class="dot pro"></span> <span data-i18n="skills.legend.pro"></span></span>
+                </div>
+                <div id="skills-container"></div>
+            </article>
+
+            <article class="ledger-box" data-ink-box="top right bottom left">
+                <h2 class="ledger-label" data-i18n="languages.header"></h2>
+                <div id="languages-container"></div>
+            </article>
+
+            <article class="ledger-box ledger-box--wide" data-ink-box="top right bottom left">
+                <h2 class="ledger-label" data-i18n="experience.header"></h2>
+                <div id="experience-container"></div>
+            </article>
+        </section>
+    </main>
+
+    <script type="module" src="src/app/main.js"></script>
 </body>
 </html>

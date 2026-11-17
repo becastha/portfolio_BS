@@ -1,0 +1,619 @@
+/* ============= MANUSCRIPT =============
+   The site's look: one page drawn like an old architectural sheet: hand-made ochre paper,
+   dark ink writing and rules, red-brown line drawings. No fills, no shadows, no cards. */
+
+:root {
+    --paper: #d99b20;
+    --paper-light: #e6ad2e;
+    --paper-stain: #b9741a;
+    --ink: #2b1707;
+    --ink-soft: rgba(43, 23, 7, 0.72);
+    --ink-faint: rgba(43, 23, 7, 0.35);
+    --drawing: #8c2a12;
+    --rule: 1.5px;
+    --font-writing: 'Kalam', 'Bradley Hand', 'Segoe Print', cursive;
+    --font-heading: 'Yatra One', 'Kalam', cursive;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ----- The paper ----- */
+
+body {
+    min-height: 100vh;
+    padding: 28px 16px 60px;
+    color: var(--ink);
+    font-family: var(--font-writing);
+    font-size: 17px;
+    line-height: 1.45;
+    background-color: var(--paper);
+    background-image:
+        /* fine paper grain */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' stitchTiles='stitch' baseFrequency='.9' numOctaves='3' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 .35  0 0 0 0 .17  0 0 0 0 .02  0 0 0 .5 -.14'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),
+        /* large blotches and stains */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900'%3E%3Cfilter id='s' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' stitchTiles='stitch' baseFrequency='.006 .009' numOctaves='4' seed='11'/%3E%3CfeColorMatrix values='0 0 0 0 .5  0 0 0 0 .22  0 0 0 0 .02  0 0 0 1.9 -.72'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E"),
+        radial-gradient(ellipse at 30% 20%, var(--paper-light) 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 70%, var(--paper-light) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, transparent 55%, var(--paper-stain) 130%);
+}
+
+.ink-defs {
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+/* ----- The ruled sheet: a frame with doubled side rules, like the margins of the drawing ----- */
+
+.sheet {
+    position: relative;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 18px 34px 40px;
+}
+
+.sheet-caption {
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+}
+
+/* Written captions are closed off with a pair of upright strokes on each side */
+.sheet-caption::before,
+.sheet-caption::after {
+    content: '';
+    display: inline-block;
+    width: 5px;
+    height: 0.9em;
+    margin: 0 12px;
+    vertical-align: -0.08em;
+    border-left: var(--rule) solid var(--ink);
+    border-right: var(--rule) solid var(--ink);
+    transform-origin: top;
+    animation: stroke-down 1.2s ease-in-out both;
+}
+
+/* ----- Line drawings ----- */
+
+.ink-drawing {
+    fill: none;
+    stroke: var(--drawing);
+    stroke-width: 1.6;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    filter: url(#ink-wobble);
+    overflow: visible;
+}
+
+.ink-drawing * {
+    vector-effect: non-scaling-stroke;
+}
+
+/* ----- Drawing the lines -----
+   Every line is drawn slowly. line-drawing.js numbers the lines (--draw-index) and sets each
+   one's length to 1, so a dash of 1 that slides away draws it. */
+
+:root {
+    --draw-duration: 0.9s; /* one line */
+    --draw-step: 0.28s; /* gap before the next line starts */
+}
+
+.draw-line {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    opacity: 0; /* nothing shows before a line's turn, not even the pen's first dot */
+    animation: draw-line var(--draw-duration) ease-in-out forwards;
+    animation-delay: calc(var(--draw-start, 0s) + var(--draw-index) * var(--draw-step));
+}
+
+@keyframes draw-line {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 1;
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Borders of boxes: an overlay of lines, one per side, drawn once the box is in view */
+[data-ink-box] {
+    position: relative;
+}
+
+.ink-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: var(--frame-width, var(--rule));
+    stroke-linecap: square;
+}
+
+.ink-frame .draw-line {
+    animation-play-state: paused;
+}
+
+.ink-visible > .ink-frame .draw-line {
+    animation-play-state: running;
+}
+
+/* The second line of a doubled side sits just inside the first */
+.ink-frame-inner.ink-side-left {
+    transform: translateX(5px);
+}
+
+.ink-frame-inner.ink-side-right {
+    transform: translateX(-5px);
+}
+
+/* Rules under rows: drawn from the left once the row is in view */
+.ink-rule {
+    position: relative;
+}
+
+.ink-rule::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-top: 1px solid var(--ink-faint);
+    transform: scaleX(0);
+    transform-origin: left;
+}
+
+.ink-rule.ink-visible::after {
+    animation: stroke-across var(--draw-duration) ease-in-out forwards;
+    animation-delay: calc(var(--draw-index, 0) * 0.3s);
+}
+
+@keyframes stroke-across {
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes stroke-down {
+    from {
+        transform: scaleY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .draw-line {
+        animation: none;
+        stroke-dashoffset: 0;
+        opacity: 1;
+    }
+
+    .ink-rule::after {
+        transform: none;
+        animation: none;
+    }
+
+    .sheet-caption::before,
+    .sheet-caption::after,
+    .ledger-label::after {
+        animation: none;
+    }
+}
+
+/* Order on the first screen: the skyline and the sheet's frame, then the pillars, the plinth,
+   the name panel and the chamber */
+.pillar,
+.plinth {
+    --draw-start: 1.5s;
+}
+
+.shrine-panel {
+    --draw-start: 7.5s;
+}
+
+.chamber {
+    --draw-start: 10s;
+    --frame-width: 2px;
+}
+
+/* The canvas the shooting stars and sparks are painted on (drawing-stars.js) */
+.drawing-stars {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* ----- Shrine: two pillars carrying the name panel ----- */
+
+.shrine {
+    display: grid;
+    grid-template-columns: 120px 1fr 120px;
+    align-items: stretch;
+    min-height: 330px;
+}
+
+.pillar {
+    width: 120px;
+    height: 100%;
+    min-height: 330px;
+}
+
+.pillar--mirrored {
+    transform: scaleX(-1);
+}
+
+.shrine-panel {
+    margin: 46px -34px 0;
+    display: flex;
+}
+
+/* ----- The name, title and contacts (profile feature) restyled as ink ----- */
+
+.cover-content {
+    width: 100%;
+    height: auto;
+    padding: 18px 16px 22px;
+}
+
+.cover-content::before {
+    display: none;
+}
+
+.cover-title {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: 1px;
+    color: var(--ink);
+    text-shadow: none;
+    margin-bottom: 6px;
+}
+
+/* The name is written, not carved: no wood */
+.wood-letter {
+    color: var(--ink);
+    text-shadow: none;
+}
+
+.wood-letter::after {
+    display: none;
+}
+
+.cover-subtitle {
+    font-size: 1.3rem;
+    color: var(--ink);
+    letter-spacing: 0.5px;
+    margin-bottom: 14px;
+}
+
+.cover-icon {
+    display: none;
+}
+
+.cover-location {
+    color: var(--ink-soft);
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+}
+
+.social-links {
+    margin-top: 12px;
+    gap: 12px;
+}
+
+.social-links a {
+    width: 40px;
+    height: 40px;
+    border: var(--rule) solid var(--drawing);
+    border-radius: 50%;
+    background: none;
+    color: var(--drawing);
+    box-shadow: none;
+    font-size: 1.1rem;
+}
+
+.social-links a:hover {
+    background: none;
+    color: var(--ink);
+    border-color: var(--ink);
+    transform: none;
+}
+
+/* ----- Plinth and chamber ----- */
+
+.plinth {
+    display: block;
+    width: 100%;
+    height: 92px;
+    margin-top: -2px;
+}
+
+.chamber {
+    width: 78%;
+    margin: -6px auto 0;
+    padding: 18px 22px 20px;
+}
+
+.decorative-page {
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    text-align: center;
+}
+
+.quote-text {
+    font-size: 1.15rem;
+    margin-bottom: 4px;
+}
+
+.quote-author {
+    color: var(--ink-soft);
+}
+
+.section {
+    display: grid;
+    grid-template-columns: 9.5em 1fr;
+    gap: 0 12px;
+    padding: 5px 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    margin: 0;
+}
+
+.section:last-child::after {
+    display: none;
+}
+
+.section:hover {
+    background: none;
+    transform: none;
+}
+
+.section h3 {
+    font-family: var(--font-writing);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--drawing);
+    margin: 0;
+}
+
+.section h3 i {
+    width: 1.3em;
+    color: var(--drawing);
+    font-size: 0.85em;
+}
+
+.section p {
+    color: var(--ink);
+}
+
+/* ----- The fold across the sheet ----- */
+
+.fold {
+    height: 14px;
+    margin: 34px -34px 30px;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(90, 45, 8, 0.28) 42%,
+        rgba(43, 23, 7, 0.5) 50%,
+        rgba(255, 220, 140, 0.35) 58%,
+        transparent 100%
+    );
+}
+
+/* ----- Ledger: plain ruled boxes, one per section ----- */
+
+.ledger {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 26px 22px;
+}
+
+.ledger-box {
+    position: relative;
+    padding: 12px 18px 14px;
+}
+
+.ledger-box--wide {
+    grid-column: 1 / -1;
+}
+
+/* The label is written inside the box, with a slanted stroke trailing from it like an annotation */
+.ledger-label {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 8px;
+    padding-right: 34px;
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+
+.ledger-label::after {
+    content: '';
+    position: absolute;
+    right: 2px;
+    top: 55%;
+    width: 22px;
+    border-top: var(--rule) solid var(--ink);
+    transform: rotate(38deg);
+    transform-origin: left center;
+    animation: label-stroke 1.2s ease-in-out 0.6s both paused;
+}
+
+.ink-visible > .ledger-label::after {
+    animation-play-state: running;
+}
+
+@keyframes label-stroke {
+    from {
+        transform: rotate(38deg) scaleX(0);
+    }
+}
+
+/* Projects and experience: entries separated by a rule, no cards */
+#projects-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 26px;
+}
+
+.project-card,
+.exp-card {
+    padding: 10px 0 10px;
+}
+
+.project-card h3,
+.exp-card h3 {
+    font-family: var(--font-writing);
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 2px 0;
+}
+
+.project-card p,
+.exp-card p {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+}
+
+.project-card p:empty {
+    display: none;
+}
+
+.project-card strong,
+.exp-card strong {
+    color: var(--drawing);
+    font-weight: 700;
+}
+
+.project-year,
+.exp-year {
+    display: inline-block;
+    padding: 0 8px;
+    border: 1px solid var(--drawing);
+    color: var(--drawing);
+    font-size: 0.82rem;
+}
+
+/* Skills and languages: one ruled line each */
+.skill-item,
+.lang-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.lang-prof {
+    color: var(--drawing);
+}
+
+.skills-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+}
+
+.skills-legend > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Level marks: an ink ring, empty, half filled or full */
+.dot,
+.skill-level {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border: var(--rule) solid var(--drawing);
+    border-radius: 50%;
+    flex: none;
+}
+
+.dot.intermediate,
+.skill-level.intermediate {
+    background: linear-gradient(to right, var(--drawing) 50%, transparent 50%);
+}
+
+.dot.pro,
+.skill-level.pro {
+    background: var(--drawing);
+}
+
+.load-error {
+    color: var(--drawing);
+}
+
+a {
+    color: var(--drawing);
+}
+
+/* ----- Narrow screens ----- */
+
+@media (max-width: 720px) {
+    body {
+        padding: 14px 6px 40px;
+        font-size: 16px;
+    }
+
+    .sheet {
+        padding: 14px 14px 30px;
+    }
+
+    .shrine {
+        grid-template-columns: 56px 1fr 56px;
+    }
+
+    .pillar {
+        width: 56px;
+    }
+
+    .shrine-panel {
+        margin: 22px -14px 0;
+    }
+
+    .cover-title {
+        font-size: 2rem;
+    }
+
+    .chamber {
+        width: 94%;
+    }
+
+    .section {
+        grid-template-columns: 1fr;
+    }
+
+    .fold {
+        margin: 26px -14px 26px;
+    }
+
+    .ledger,
+    #projects-container {
+        grid-template-columns: 1fr;
+    }
+
+    .ledger-box--wide {
+        grid-column: auto;
+    }
+}

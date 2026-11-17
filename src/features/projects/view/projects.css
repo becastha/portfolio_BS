@@ -1,0 +1,43 @@
+/* ============= PROJECTS ============= */
+
+.project-card {
+    margin-bottom: 24px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(139, 115, 85, 0.08) 0%, rgba(139, 115, 85, 0.03) 100%);
+    border-radius: 8px;
+    border-left: 5px solid #8b7355;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.project-card:hover {
+    background: linear-gradient(135deg, rgba(139, 115, 85, 0.12) 0%, rgba(139, 115, 85, 0.06) 100%);
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.project-year {
+    display: inline-block;
+    background: linear-gradient(135deg, #8b7355, #a0826d);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.project-card h3 {
+    font-size: 1.2rem;
+    color: #2d1810;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.project-card p {
+    color: #4a3f35;
+    margin: 6px 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+

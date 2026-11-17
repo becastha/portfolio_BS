@@ -1,0 +1,17 @@
+/* ============= PAGE HEADERS ============= */
+
+.page-header {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2d1810;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #8b7355;
+    letter-spacing: 1px;
+}
+
+
+/* A header that follows other content on the same page */
+.page-header--spaced {
+    margin-top: 30px;
+}

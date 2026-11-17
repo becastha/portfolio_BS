@@ -1,0 +1,10 @@
+{
+    "name": "Bikash Shrestha",
+    "titlePrefix": "Poor",
+    "roles": ["Developer", "Engineer"],
+    "location": "Sydney, Australia",
+    "links": [
+        { "network": "github", "url": "https://github.com/becastha" },
+        { "network": "linkedin", "url": "https://www.linkedin.com/in/bikash-shrestha-6b6aa4148/" }
+    ]
+}

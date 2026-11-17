@@ -1,0 +1,48 @@
+/* ============= OVERVIEW ============= */
+
+/* Sections */
+.section {
+    margin-bottom: 25px;
+    padding: 18px;
+    border-radius: 6px;
+    background: rgba(139, 115, 85, 0.05);
+    border-left: 4px solid #8b7355;
+    transition: all 0.3s ease;
+}
+
+.section:hover {
+    background: rgba(139, 115, 85, 0.1);
+    transform: translateX(4px);
+}
+
+.section h3 {
+    font-size: 1.3rem;
+    color: #2d1810;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+}
+
+.section h3 i {
+    color: #8b7355;
+    font-size: 1.2rem;
+}
+
+.section p {
+    font-size: 1rem;
+    color: #4a3f35;
+    line-height: 1.7;
+}
+
+
+/* Quote */
+.decorative-page {
+    margin-bottom: 30px;
+}
+
+.quote-text {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}

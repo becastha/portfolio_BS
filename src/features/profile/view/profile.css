@@ -1,0 +1,178 @@
+/* ============= PROFILE (COVER PAGE) ============= */
+
+/* Cover Page Design */
+.cover-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px;
+}
+
+.cover-content::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+    border: 2px solid #d4af37;
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+
+.cover-label {
+    font-size: 0.9rem;
+    letter-spacing: 4px;
+    color: #d4af37;
+    margin-bottom: 30px;
+    padding: 6px 20px;
+    border: 2px solid #d4af37;
+    background: rgba(212, 175, 55, 0.1);
+}
+
+.cover-title {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #d4af37;
+    text-shadow:
+        0 0 20px rgba(212, 175, 55, 0.5),
+        2px 2px 4px rgba(0, 0, 0, 0.8);
+    letter-spacing: 2px;
+}
+
+.cover-subtitle {
+    font-size: 1.5rem;
+    color: #f5deb3;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+}
+
+.cover-icon {
+    font-size: 4rem;
+    margin: 30px 0;
+    color: #d4af37;
+    opacity: 0.7;
+}
+
+.cover-location {
+    font-size: 1rem;
+    color: #c9b896;
+    letter-spacing: 1px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.social-links a {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(139, 115, 85, 0.1);
+    border: 2px solid #8b7355;
+    border-radius: 50%;
+    color: #8b7355;
+    font-size: 1.3rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
+}
+
+.social-links a:hover {
+    background: rgba(139, 115, 85, 0.25);
+    transform: scale(1.1);
+}
+
+
+/* ============= COVER BUILD ANIMATION ============= */
+
+/* The name and the title, which appear letter by letter */
+.build-stage {
+    position: relative;
+}
+
+/* Words stay whole when the name wraps */
+.build-word {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+/* A letter takes its place in the layout from the start, but is only seen once built */
+.build-letter {
+    display: inline-block;
+    visibility: hidden;
+}
+
+.build-letter.placed {
+    visibility: visible;
+    animation: letter-placed 0.22s cubic-bezier(0.3, 1.6, 0.6, 1);
+}
+
+@keyframes letter-placed {
+    from {
+        transform: translateY(-0.35em) scale(1.25);
+        opacity: 0;
+    }
+}
+
+/* Torn down: the letters fly apart and drop */
+.build-letter.smashed {
+    animation: letter-smashed 0.65s cubic-bezier(0.4, 0, 0.9, 0.6) forwards;
+}
+
+@keyframes letter-smashed {
+    to {
+        transform: translate(var(--smash-x, 0), 2.2em) rotate(var(--smash-turn, 0deg));
+        opacity: 0;
+    }
+}
+
+/* ----- Wooden 3D letters (the name) ----- */
+
+.wood-letter {
+    position: relative;
+    color: #b0733a;
+    /* Stacked shadows are the side of the plank; the last one is the shadow it casts */
+    text-shadow:
+        0 1px 0 #9c6431,
+        0 2px 0 #8e5a2c,
+        0 3px 0 #805027,
+        0 4px 0 #724622,
+        0 5px 0 #643c1d,
+        0 6px 0 #563319,
+        0 7px 0 #482a14,
+        0 12px 14px rgba(0, 0, 0, 0.6);
+}
+
+/* The face of the plank: light wood with grain, drawn over the letter */
+.wood-letter::after {
+    content: attr(data-letter);
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: transparent;
+    text-shadow: none;
+    background:
+        repeating-linear-gradient(
+            94deg,
+            rgba(92, 51, 16, 0) 0 5px,
+            rgba(92, 51, 16, 0.38) 5px 6px,
+            rgba(92, 51, 16, 0) 6px 9px,
+            rgba(255, 226, 170, 0.22) 9px 10px,
+            rgba(92, 51, 16, 0.2) 13px 14px
+        ),
+        linear-gradient(to bottom, #e0aa68 0%, #c98d4b 45%, #a96b31 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+}

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="app.title"></title>
+
+    <!-- Shared styles -->
+    <link rel="stylesheet" href="src/shared/styles/base.css">
+
+    <!-- Feature styles -->
+    <link rel="stylesheet" href="src/features/notebook/view/notebook.css">
+    <link rel="stylesheet" href="src/features/notebook/view/spiral.css">
+    <link rel="stylesheet" href="src/features/notebook/view/pages.css">
+    <link rel="stylesheet" href="src/features/notebook/view/page-header.css">
+    <link rel="stylesheet" href="src/features/profile/view/profile.css">
+    <link rel="stylesheet" href="src/features/overview/view/overview.css">
+    <link rel="stylesheet" href="src/features/skills/view/skills.css">
+    <link rel="stylesheet" href="src/features/projects/view/projects.css">
+    <link rel="stylesheet" href="src/features/experience/view/experience.css">
+    <link rel="stylesheet" href="src/features/languages/view/languages.css">
+    <link rel="stylesheet" href="src/shared/styles/unused-content.css">
+    <link rel="stylesheet" href="src/features/notebook/view/controls.css">
+    <link rel="stylesheet" href="src/features/settings/view/settings.css">
+
+    <!-- Cross-feature overrides: keep these last -->
+    <link rel="stylesheet" href="src/shared/styles/themes.css">
+    <link rel="stylesheet" href="src/shared/styles/responsive.css">
+
+    <!-- External libraries -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body class="serif-font">
+
+    <!-- Settings feature -->
+    <button id="settings-toggle" data-i18n-title="settings.toggle">
+        <i class="fas fa-cog"></i>
+    </button>
+
+    <div id="settings-panel" class="settings-panel">
+        <div class="settings-header">
+            <h3><i class="fas fa-palette"></i> <span data-i18n="settings.title"></span></h3>
+            <button id="close-settings" class="close-btn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="settings-section">
+            <label><i class="fas fa-adjust"></i> <span data-i18n="settings.theme.label"></span></label>
+            <div class="theme-options">
+                <button class="theme-btn active" data-theme="default">
+                    <i class="fas fa-book"></i> <span data-i18n="settings.theme.default"></span>
+                </button>
+                <button class="theme-btn" data-theme="dark">
+                    <i class="fas fa-moon"></i> <span data-i18n="settings.theme.dark"></span>
+                </button>
+                <button class="theme-btn" data-theme="rocketbook">
+                    <i class="fas fa-rocket"></i> <span data-i18n="settings.theme.rocketbook"></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <label><i class="fas fa-font"></i> <span data-i18n="settings.font.label"></span></label>
+            <div class="font-options">
+                <button class="font-btn active" data-font="serif">
+                    <span class="font-sample--serif" data-i18n="settings.font.serif"></span>
+                </button>
+                <button class="font-btn" data-font="sans">
+                    <span class="font-sample--sans" data-i18n="settings.font.sans"></span>
+                </button>
+                <button class="font-btn" data-font="mono">
+                    <span class="font-sample--mono" data-i18n="settings.font.mono"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notebook feature -->
+    <div class="notebook-container">
+
+        <div class="spiral-binding">
+            <div class="spiral-coil"></div>
+        </div>
+
+        <!-- Pages are mounted here from src/features/notebook/view/pages -->
+        <div id="notebook"></div>
+
+        <div class="controls">
+            <button id="btn-first" data-i18n-title="controls.first">
+                <i class="fas fa-step-backward"></i>
+            </button>
+            <button id="btn-prev" data-i18n-title="controls.previous">
+                <i class="fas fa-chevron-up"></i>
+            </button>
+            <span class="page-display">
+                <span data-i18n="controls.page"></span> <span id="current-page"></span> / <span id="total-pages"></span>
+            </span>
+            <button id="btn-next" data-i18n-title="controls.next">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <button id="btn-last" data-i18n-title="controls.last">
+                <i class="fas fa-step-forward"></i>
+            </button>
+            <div class="control-spacer"></div>
+            <button id="btn-zoom-in" data-i18n-title="controls.zoomIn">
+                <i class="fas fa-search-plus"></i>
+            </button>
+            <button id="btn-zoom-out" data-i18n-title="controls.zoomOut">
+                <i class="fas fa-search-minus"></i>
+            </button>
+            <button id="btn-fullscreen" data-i18n-title="controls.fullscreen">
+                <i class="fas fa-expand"></i>
+            </button>
+            <!-- Sound feature -->
+            <button id="btn-sound" data-i18n-title="controls.sound">
+                <i class="fas fa-volume-mute"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Starfield feature -->
+    <div id="particles-bg"></div>
+
+    <script type="module" src="src/app/notebook.js"></script>
+</body>
+</html>

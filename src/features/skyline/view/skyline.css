@@ -1,0 +1,69 @@
+/* ============= SKYLINE =============
+   The Kathmandu skyline along the bottom of the window. The pen traces the contours from left to
+   right; the ink of the illustration follows behind it. Colours come from the page (--ink). */
+
+:root {
+    /* Width of the artwork: the window's width, but never taller than 46% of the window.
+       3.9457 is the artwork's width divided by its height. */
+    --skyline-width: min(100%, calc(46vh * 3.9457));
+    /* Colour the writing takes where it crosses the ink */
+    --skyline-light: #ffffff;
+}
+
+.skyline {
+    --draw-duration: 1s;
+    --draw-step: 0.07s;
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    width: var(--skyline-width);
+    height: auto;
+    transform: translateX(-50%);
+    z-index: -1;
+    stroke: var(--ink);
+    stroke-width: 0.5;
+    opacity: 0.42;
+    pointer-events: none;
+    filter: none; /* too large to run the pen-wobble filter on every frame */
+}
+
+/* The illustration itself, uncovered from the left at the pace of the pen */
+.skyline-ink {
+    fill: var(--ink);
+    stroke: none;
+    clip-path: inset(0 100% 0 0);
+    animation: ink-wipe linear forwards;
+    animation-duration: calc(var(--draw-count) * var(--draw-step));
+    animation-delay: var(--draw-duration);
+}
+
+@keyframes ink-wipe {
+    to {
+        clip-path: inset(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .skyline-ink {
+        animation: none;
+        clip-path: none;
+    }
+}
+
+/* ----- Writing that crosses the ink turns light -----
+   Once the skyline is inked (skyline-view.js marks the page), every piece of writing is painted
+   with a picture instead of a flat colour: its own colour, with the skyline in white laid over it
+   exactly where the skyline sits in the window. Where a letter crosses the ink it shows white. */
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .skyline-inked :where(h1, h2, h3, p, span, strong, a, i, label):not(.dot, .skill-level) {
+        background-image: url('./assets/kathmandu-skyline.svg'), linear-gradient(currentColor, currentColor);
+        background-repeat: no-repeat;
+        background-position: center bottom, center;
+        background-size: var(--skyline-width) auto, cover;
+        background-attachment: fixed;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}

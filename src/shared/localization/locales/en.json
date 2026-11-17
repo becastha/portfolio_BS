@@ -1,0 +1,48 @@
+{
+    "app.title": "Bikash Shrestha",
+
+    "settings.toggle": "Settings",
+    "settings.title": "Settings",
+    "settings.theme.label": "Theme",
+    "settings.theme.default": "Classic",
+    "settings.theme.dark": "Dark",
+    "settings.theme.rocketbook": "Rocketbook",
+    "settings.font.label": "Font Style",
+    "settings.font.serif": "Serif",
+    "settings.font.sans": "Sans-Serif",
+    "settings.font.mono": "Monospace",
+
+    "controls.first": "First Page",
+    "controls.previous": "Previous Page",
+    "controls.next": "Next Page",
+    "controls.last": "Last Page",
+    "controls.zoomIn": "Zoom In",
+    "controls.zoomOut": "Zoom Out",
+    "controls.fullscreen": "Fullscreen",
+    "controls.sound": "Toggle Sound",
+    "controls.page": "Page",
+
+    "profile.error": "Unable to load profile",
+    "overview.error": "Unable to load overview",
+
+    "projects.header": "Projects",
+    "projects.label.role": "Role:",
+    "projects.label.tech": "Tech:",
+    "projects.label.team": "Team:",
+    "projects.error": "Unable to load projects",
+
+    "skills.header": "Skills",
+    "skills.legend.beginner": "Learning",
+    "skills.legend.intermediate": "Intermediate",
+    "skills.legend.pro": "Advanced",
+    "skills.error": "Unable to load skills",
+
+    "experience.header": "Experience",
+    "experience.label.role": "Role:",
+    "experience.label.environment": "Environment:",
+    "experience.label.team": "Team:",
+    "experience.error": "Unable to load experience",
+
+    "languages.header": "Languages",
+    "languages.error": "Unable to load languages"
+}
