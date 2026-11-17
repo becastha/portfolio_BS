@@ -32,8 +32,10 @@ function renderProjectCard(project) {
             createElement(Tag.SPAN, { className: ProjectsCssClass.YEAR, text: project.year }),
             createElement(Tag.H3, { text: project.title }),
             createLabelledLine(localization.t(StringKey.PROJECTS_ROLE), project.role),
-            createLabelledLine(localization.t(StringKey.PROJECTS_TECH), project.technologies),
-            createLabelledLine(localization.t(StringKey.PROJECTS_TEAM), project.teamSize),
+            ...(project.technologies
+                ? [createLabelledLine(localization.t(StringKey.PROJECTS_TECH), project.technologies)]
+                : []),
+            ...(project.teamSize ? [createLabelledLine(localization.t(StringKey.PROJECTS_TEAM), project.teamSize)] : []),
             createElement(Tag.P, { text: project.description }),
         ],
     });

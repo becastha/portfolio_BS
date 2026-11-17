@@ -1,11 +1,38 @@
-{
-    "Golang": "Intermediate",
-    "PHP": "Intermediate",
-    "Java": "Intermediate",
-    "Node.js": "Intermediate",
-    "JavaScript": "Intermediate",
-    "AWS": "Intermediate",
-    "MySQL": "Intermediate",
-    "Linux": "Intermediate",
-    "Docker": "Beginner"
-}
+[
+    {
+        "name": "Go",
+        "years": 3,
+        "frameworks": "Gin, Fiber"
+    },
+    {
+        "name": "PHP",
+        "years": 3,
+        "frameworks": "Laravel"
+    },
+    {
+        "name": "JavaScript",
+        "years": 2,
+        "frameworks": "Vue.js, Express.js"
+    },
+    {
+        "name": "Java",
+        "years": 1,
+        "frameworks": "Spring Boot"
+    },
+    {
+        "name": "Dart",
+        "years": 1,
+        "frameworks": "Flutter"
+    },
+    {
+        "name": "TypeScript",
+        "frameworks": "Next.js, Nest.js"
+    },
+    {
+        "name": "C"
+    },
+    {
+        "name": "SQL",
+        "frameworks": "PostgreSQL, MySQL, SQLite"
+    }
+]

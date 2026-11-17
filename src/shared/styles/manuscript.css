@@ -6,11 +6,12 @@
     --paper: #d99b20;
     --paper-light: #e6ad2e;
     --paper-stain: #b9741a;
-    --ink: #2b1707;
-    --ink-soft: rgba(43, 23, 7, 0.72);
-    --ink-faint: rgba(43, 23, 7, 0.35);
+    --ink: #000000;
+    --ink-soft: rgba(0, 0, 0, 0.9); /* secondary writing: still close to black, for readability */
+    --ink-faint: rgba(0, 0, 0, 0.35); /* thin rules only, never writing */
     --drawing: #8c2a12;
     --rule: 1.5px;
+    --sheet-width: 860px; /* the column of writing; the skyline fades behind it (skyline.css) */
     --font-writing: 'Kalam', 'Bradley Hand', 'Segoe Print', cursive;
     --font-heading: 'Yatra One', 'Kalam', cursive;
 }
@@ -21,6 +22,24 @@
     box-sizing: border-box;
 }
 
+/* Text size: the settings feature sets --text-scale on <html>; every size in rem follows it */
+html {
+    font-size: calc(100% * var(--text-scale, 1));
+}
+
+/* ----- Dark mode (settings feature puts dark-theme on <body>): dark paper, pale ink ----- */
+body.dark-theme {
+    --paper: #1e1711;
+    --paper-light: #2b2118;
+    --paper-stain: #0c0907;
+    --ink: #ecdcb4;
+    --ink-soft: rgba(236, 220, 180, 0.78);
+    --ink-faint: rgba(236, 220, 180, 0.3);
+    --drawing: #e2a24a;
+    /* the grain and the stains darken the dark paper instead of glowing on it */
+    background-blend-mode: multiply, multiply, normal, normal, normal;
+}
+
 /* ----- The paper ----- */
 
 body {
@@ -28,7 +47,7 @@ body {
     padding: 28px 16px 60px;
     color: var(--ink);
     font-family: var(--font-writing);
-    font-size: 17px;
+    font-size: 1.0625rem;
     line-height: 1.45;
     background-color: var(--paper);
     background-image:
@@ -50,8 +69,16 @@ body {
 /* ----- The ruled sheet: a frame with doubled side rules, like the margins of the drawing ----- */
 
 .sheet {
+    /* A glow of bare paper around every letter keeps the writing readable where it crosses
+       the skyline drawn behind the sheet */
+    text-shadow:
+        0 0 1px var(--paper-light),
+        0 0 3px var(--paper-light),
+        0 0 6px var(--paper),
+        0 0 10px var(--paper),
+        0 0 14px var(--paper);
     position: relative;
-    max-width: 860px;
+    max-width: var(--sheet-width);
     margin: 0 auto;
     padding: 18px 34px 40px;
 }
@@ -209,15 +236,11 @@ body {
     }
 }
 
-/* Order on the first screen: the skyline and the sheet's frame, then the pillars, the plinth,
-   the name panel and the chamber */
+/* Order on the first screen: the skyline and the sheet's frame, then the pillars, the plinth
+   and the chamber */
 .pillar,
 .plinth {
     --draw-start: 1.5s;
-}
-
-.shrine-panel {
-    --draw-start: 7.5s;
 }
 
 .chamber {
@@ -278,14 +301,14 @@ body {
     line-height: 1.15;
     letter-spacing: 1px;
     color: var(--ink);
-    text-shadow: none;
+    text-shadow: inherit;
     margin-bottom: 6px;
 }
 
 /* The name is written, not carved: no wood */
 .wood-letter {
     color: var(--ink);
-    text-shadow: none;
+    text-shadow: inherit;
 }
 
 .wood-letter::after {
@@ -419,11 +442,14 @@ body {
 
 .ledger {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    /* minmax(0, ...) lets a column be narrower than its longest unbroken word */
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 26px 22px;
 }
 
 .ledger-box {
+    /* long strings without spaces (lists of tools) wrap instead of widening the page */
+    overflow-wrap: anywhere;
     position: relative;
     padding: 12px 18px 14px;
 }
@@ -469,7 +495,7 @@ body {
 /* Projects and experience: entries separated by a rule, no cards */
 #projects-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 0 26px;
 }
 
@@ -511,6 +537,58 @@ body {
     font-size: 0.82rem;
 }
 
+/* Experience: where, the company's link, and what was done there */
+.exp-location {
+    margin-left: 10px;
+    color: var(--ink-soft);
+    font-size: 0.88rem;
+}
+
+.exp-card h3 a {
+    color: inherit;
+    text-decoration-color: var(--ink-faint);
+    text-underline-offset: 3px;
+}
+
+.exp-responsibilities {
+    margin: 6px 0 0 1.1em;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+}
+
+.exp-responsibilities li {
+    padding: 1px 0 1px 2px;
+}
+
+.exp-responsibilities li::marker {
+    color: var(--drawing);
+}
+
+/* Education: one entry per course of study */
+.edu-entry {
+    padding: 10px 0;
+}
+
+.edu-period {
+    display: inline-block;
+    padding: 0 8px;
+    border: 1px solid var(--drawing);
+    color: var(--drawing);
+    font-size: 0.82rem;
+}
+
+.edu-title {
+    font-family: var(--font-writing);
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 2px 0;
+}
+
+.edu-school {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+}
+
 /* Skills and languages: one ruled line each */
 .skill-item,
 .lang-item {
@@ -524,40 +602,22 @@ body {
     color: var(--drawing);
 }
 
-.skills-legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px 16px;
-    margin-bottom: 8px;
-    font-size: 0.85rem;
+/* Programming languages: the name, the frameworks used with it, the years */
+.skill-name {
+    font-weight: 700;
+    min-width: 6.5em;
+}
+
+.skill-frameworks {
+    flex: 1;
+    padding: 0 10px;
     color: var(--ink-soft);
+    font-size: 0.9rem;
 }
 
-.skills-legend > span {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-/* Level marks: an ink ring, empty, half filled or full */
-.dot,
-.skill-level {
-    display: inline-block;
-    width: 13px;
-    height: 13px;
-    border: var(--rule) solid var(--drawing);
-    border-radius: 50%;
-    flex: none;
-}
-
-.dot.intermediate,
-.skill-level.intermediate {
-    background: linear-gradient(to right, var(--drawing) 50%, transparent 50%);
-}
-
-.dot.pro,
-.skill-level.pro {
-    background: var(--drawing);
+.skill-years {
+    color: var(--drawing);
+    white-space: nowrap;
 }
 
 .load-error {
@@ -568,12 +628,132 @@ a {
     color: var(--drawing);
 }
 
+/* ----- Settings button and panel (settings feature) ----- */
+
+.settings-toggle {
+    position: fixed;
+    top: 14px;
+    right: 14px;
+    z-index: 20;
+    width: 44px;
+    height: 44px;
+    border: var(--rule) solid var(--ink);
+    border-radius: 50%;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 1.15rem;
+    cursor: pointer;
+}
+
+.settings-panel {
+    position: fixed;
+    top: 68px;
+    right: 14px;
+    z-index: 20;
+    width: min(280px, calc(100vw - 28px));
+    padding: 14px 16px 16px;
+    border: var(--rule) solid var(--ink);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-writing);
+    /* closed: out of the way and not reachable */
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        visibility 0.2s;
+}
+
+.settings-panel.active {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+}
+
+.settings-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--ink-faint);
+}
+
+.settings-header h3 {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 400;
+}
+
+.settings-close {
+    border: none;
+    background: none;
+    color: var(--ink);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 6px;
+}
+
+.settings-section + .settings-section {
+    margin-top: 14px;
+}
+
+.settings-label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--drawing);
+    font-weight: 700;
+}
+
+.settings-options {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.theme-btn,
+.size-btn {
+    min-height: 40px;
+    padding: 6px 12px;
+    border: var(--rule) solid var(--ink-faint);
+    background: none;
+    color: var(--ink);
+    font: inherit;
+    cursor: pointer;
+}
+
+.theme-btn {
+    flex: 1;
+}
+
+.theme-btn.active {
+    border-color: var(--drawing);
+    color: var(--drawing);
+    font-weight: 700;
+}
+
+.size-btn {
+    width: 44px;
+}
+
+.size-btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+.size-value {
+    flex: 1;
+    text-align: center;
+}
+
 /* ----- Narrow screens ----- */
 
 @media (max-width: 720px) {
     body {
         padding: 14px 6px 40px;
-        font-size: 16px;
+        font-size: 1rem;
     }
 
     .sheet {
@@ -610,7 +790,7 @@ a {
 
     .ledger,
     #projects-container {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
     }
 
     .ledger-box--wide {

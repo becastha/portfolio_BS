@@ -1,12 +1,15 @@
-// Settings View: the settings panel, and the theme and font classes on <body>.
+// Settings View: the settings panel, the theme and font classes on <body>, and the text scale on <html>.
+// A page may offer only some of the settings; controls that are not on the page are skipped.
 
 import { SharedCssClass } from '../../../shared/constants/css.js';
 import { DomEvent } from '../../../shared/constants/html.js';
 import { byId } from '../../../shared/ui/dom.js';
 import {
     FONT_BODY_CLASS,
+    PERCENT_SUFFIX,
     SettingsElementId,
     SettingsSelector,
+    TEXT_SCALE_VARIABLE,
     THEME_BODY_CLASS,
 } from '../settings-constants.js';
 
@@ -15,6 +18,9 @@ export class SettingsView {
     #toggle = byId(SettingsElementId.TOGGLE);
     #panel = byId(SettingsElementId.PANEL);
     #close = byId(SettingsElementId.CLOSE);
+    #textSmaller = byId(SettingsElementId.TEXT_SMALLER);
+    #textLarger = byId(SettingsElementId.TEXT_LARGER);
+    #textSizeValue = byId(SettingsElementId.TEXT_SIZE_VALUE);
     #themeButtons = [...document.querySelectorAll(SettingsSelector.THEME_BUTTON)];
     #fontButtons = [...document.querySelectorAll(SettingsSelector.FONT_BUTTON)];
 
@@ -42,11 +48,19 @@ export class SettingsView {
             button.addEventListener(DomEvent.CLICK, () => viewModel.selectFont(button.dataset.font));
         });
 
+        this.#textSmaller?.addEventListener(DomEvent.CLICK, () => viewModel.decreaseTextSize());
+        this.#textLarger?.addEventListener(DomEvent.CLICK, () => viewModel.increaseTextSize());
+
         viewModel.state.subscribe(state => this.#render(state));
     }
 
-    #render({ theme, font, isPanelOpen }) {
+    #render({ theme, font, textScale, canIncreaseText, canDecreaseText, isPanelOpen }) {
         this.#panel.classList.toggle(SharedCssClass.ACTIVE, isPanelOpen);
+
+        document.documentElement.style.setProperty(TEXT_SCALE_VARIABLE, textScale);
+        if (this.#textSizeValue) this.#textSizeValue.textContent = `${Math.round(textScale * 100)}${PERCENT_SUFFIX}`;
+        if (this.#textSmaller) this.#textSmaller.disabled = !canDecreaseText;
+        if (this.#textLarger) this.#textLarger.disabled = !canIncreaseText;
 
         applyBodyClass(THEME_BODY_CLASS, theme);
         applyBodyClass(FONT_BODY_CLASS, font);

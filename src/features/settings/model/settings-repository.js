@@ -1,7 +1,13 @@
-// Persists the user's theme and font in localStorage.
+// Persists the user's theme, font and text size in localStorage.
 
 import { DevMessage, logger } from '../../../shared/logging/logger.js';
-import { FONT_BODY_CLASS, SettingsDefault, SettingsStorageKey, THEME_BODY_CLASS } from '../settings-constants.js';
+import {
+    FONT_BODY_CLASS,
+    SettingsDefault,
+    SettingsStorageKey,
+    TEXT_SIZES,
+    THEME_BODY_CLASS,
+} from '../settings-constants.js';
 
 function read(key) {
     try {
@@ -31,4 +37,9 @@ export const settingsRepository = Object.freeze({
     saveTheme: theme => write(SettingsStorageKey.THEME, theme),
     loadFont: () => readOption(SettingsStorageKey.FONT, FONT_BODY_CLASS, SettingsDefault.FONT),
     saveFont: font => write(SettingsStorageKey.FONT, font),
+    loadTextSize: () => {
+        const saved = read(SettingsStorageKey.TEXT_SIZE);
+        return TEXT_SIZES.some(size => size.id === saved) ? saved : SettingsDefault.TEXT_SIZE;
+    },
+    saveTextSize: textSize => write(SettingsStorageKey.TEXT_SIZE, textSize),
 });

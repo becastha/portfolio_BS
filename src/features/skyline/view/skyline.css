@@ -6,25 +6,46 @@
     /* Width of the artwork: the window's width, but never taller than 46% of the window.
        3.9457 is the artwork's width divided by its height. */
     --skyline-width: min(100%, calc(46vh * 3.9457));
-    /* Colour the writing takes where it crosses the ink */
-    --skyline-light: #ffffff;
+    /* How much of the skyline shows behind the column of writing (1 = all of it) */
+    --skyline-behind-writing: 0.2;
 }
 
 .skyline {
     --draw-duration: 1s;
     --draw-step: 0.07s;
     position: fixed;
-    left: 50%;
+    /* centred with margins, not a shift: a shifted box would make phones widen the page */
+    left: 0;
+    right: 0;
     bottom: 0;
     width: var(--skyline-width);
     height: auto;
-    transform: translateX(-50%);
+    margin: 0 auto;
     z-index: -1;
     stroke: var(--ink);
     stroke-width: 0.5;
-    opacity: 0.42;
+    opacity: 0.5;
     pointer-events: none;
     filter: none; /* too large to run the pen-wobble filter on every frame */
+
+    /* Keep the writing readable: the skyline is strong in the margins and only a faint trace
+       behind the column of writing in the middle of the window. */
+    --behind: rgba(0, 0, 0, var(--skyline-behind-writing));
+    --column-edge: calc(var(--sheet-width, 860px) / 2);
+    -webkit-mask-image: linear-gradient(
+        to right,
+        #000 calc(50% - var(--column-edge) - 30px),
+        var(--behind) calc(50% - var(--column-edge) + 10px),
+        var(--behind) calc(50% + var(--column-edge) - 10px),
+        #000 calc(50% + var(--column-edge) + 30px)
+    );
+    mask-image: linear-gradient(
+        to right,
+        #000 calc(50% - var(--column-edge) - 30px),
+        var(--behind) calc(50% - var(--column-edge) + 10px),
+        var(--behind) calc(50% + var(--column-edge) - 10px),
+        #000 calc(50% + var(--column-edge) + 30px)
+    );
 }
 
 /* The illustration itself, uncovered from the left at the pace of the pen */
@@ -47,23 +68,5 @@
     .skyline-ink {
         animation: none;
         clip-path: none;
-    }
-}
-
-/* ----- Writing that crosses the ink turns light -----
-   Once the skyline is inked (skyline-view.js marks the page), every piece of writing is painted
-   with a picture instead of a flat colour: its own colour, with the skyline in white laid over it
-   exactly where the skyline sits in the window. Where a letter crosses the ink it shows white. */
-
-@supports ((-webkit-background-clip: text) or (background-clip: text)) {
-    .skyline-inked :where(h1, h2, h3, p, span, strong, a, i, label):not(.dot, .skill-level) {
-        background-image: url('./assets/kathmandu-skyline.svg'), linear-gradient(currentColor, currentColor);
-        background-repeat: no-repeat;
-        background-position: center bottom, center;
-        background-size: var(--skyline-width) auto, cover;
-        background-attachment: fixed;
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
     }
 }

@@ -14,8 +14,8 @@ export async function loadProjects() {
         year: project.year,
         title: project.title,
         role: project.role,
-        technologies: project.technologies,
-        teamSize: project.teamSize,
+        technologies: project.technologies ?? '',
+        teamSize: project.teamSize ?? '',
         description: project.description ?? '',
     }));
 }

@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="src/features/profile/view/profile.css">
     <link rel="stylesheet" href="src/shared/styles/manuscript.css">
     <link rel="stylesheet" href="src/features/skyline/view/skyline.css">
+    <link rel="stylesheet" href="src/features/cursor-effects/view/cursor-effects.css">
 </head>
 <body>
 
@@ -41,13 +42,52 @@
         </defs>
     </svg>
 
+    <!-- Settings feature: light or dark, and the size of the text -->
+    <button id="settings-toggle" class="settings-toggle" data-i18n-title="settings.toggle">
+        <i class="fas fa-cog"></i>
+    </button>
+
+    <div id="settings-panel" class="settings-panel">
+        <div class="settings-header">
+            <h3 data-i18n="settings.title"></h3>
+            <button id="close-settings" class="settings-close" data-i18n-title="settings.close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="settings-section">
+            <span class="settings-label" data-i18n="settings.theme.label"></span>
+            <div class="settings-options">
+                <button class="theme-btn" data-theme="default">
+                    <i class="fas fa-sun"></i> <span data-i18n="settings.theme.light"></span>
+                </button>
+                <button class="theme-btn" data-theme="dark">
+                    <i class="fas fa-moon"></i> <span data-i18n="settings.theme.dark"></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <span class="settings-label" data-i18n="settings.size.label"></span>
+            <div class="settings-options">
+                <button id="text-size-decrease" class="size-btn" data-i18n-title="settings.size.smaller">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <span id="text-size-value" class="size-value"></span>
+                <button id="text-size-increase" class="size-btn" data-i18n-title="settings.size.larger">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <main class="sheet" data-ink-box="top left right" data-ink-double="left right">
         <p class="sheet-caption" data-i18n="app.title"></p>
 
         <!-- Two pillars carrying the name panel -->
         <section class="shrine">
             <svg class="pillar ink-drawing" aria-hidden="true"><use href="#pillar"/></svg>
-            <div class="shrine-panel" data-ink-box="left bottom right">
+            <div class="shrine-panel">
                 <div class="cover-content" id="profile-container"></div>
             </div>
             <svg class="pillar pillar--mirrored ink-drawing" aria-hidden="true"><use href="#pillar"/></svg>
@@ -77,11 +117,6 @@
 
             <article class="ledger-box" data-ink-box="top right bottom left">
                 <h2 class="ledger-label" data-i18n="skills.header"></h2>
-                <div class="skills-legend">
-                    <span><span class="dot beginner"></span> <span data-i18n="skills.legend.beginner"></span></span>
-                    <span><span class="dot intermediate"></span> <span data-i18n="skills.legend.intermediate"></span></span>
-                    <span><span class="dot pro"></span> <span data-i18n="skills.legend.pro"></span></span>
-                </div>
                 <div id="skills-container"></div>
             </article>
 
@@ -93,6 +128,11 @@
             <article class="ledger-box ledger-box--wide" data-ink-box="top right bottom left">
                 <h2 class="ledger-label" data-i18n="experience.header"></h2>
                 <div id="experience-container"></div>
+            </article>
+
+            <article class="ledger-box ledger-box--wide" data-ink-box="top right bottom left">
+                <h2 class="ledger-label" data-i18n="education.header"></h2>
+                <div id="education-container"></div>
             </article>
         </section>
     </main>

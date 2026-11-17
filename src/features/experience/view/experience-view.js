@@ -1,6 +1,6 @@
 // Experience View: renders one card per workplace.
 
-import { Tag } from '../../../shared/constants/html.js';
+import { Attr, LinkRel, LinkTarget, Tag } from '../../../shared/constants/html.js';
 import { localization } from '../../../shared/localization/localization.js';
 import { StringKey } from '../../../shared/localization/string-keys.js';
 import { byId, createElement, createLabelledLine } from '../../../shared/ui/dom.js';
@@ -30,10 +30,38 @@ function renderExperienceCard(experience) {
         className: ExperienceCssClass.CARD,
         children: [
             createElement(Tag.SPAN, { className: ExperienceCssClass.YEAR, text: experience.year }),
-            createElement(Tag.H3, { text: experience.officeName }),
+            ...(experience.location
+                ? [createElement(Tag.SPAN, { className: ExperienceCssClass.LOCATION, text: experience.location })]
+                : []),
+            createElement(Tag.H3, { children: [renderOfficeName(experience)] }),
             createLabelledLine(localization.t(StringKey.EXPERIENCE_ROLE), experience.role),
-            createLabelledLine(localization.t(StringKey.EXPERIENCE_ENVIRONMENT), experience.environment),
-            createLabelledLine(localization.t(StringKey.EXPERIENCE_TEAM), experience.teamSize),
+            ...(experience.environment
+                ? [createLabelledLine(localization.t(StringKey.EXPERIENCE_ENVIRONMENT), experience.environment)]
+                : []),
+            ...(experience.teamSize
+                ? [createLabelledLine(localization.t(StringKey.EXPERIENCE_TEAM), experience.teamSize)]
+                : []),
+            ...(experience.responsibilities.length > 0
+                ? [
+                      createElement(Tag.UL, {
+                          className: ExperienceCssClass.RESPONSIBILITIES,
+                          children: experience.responsibilities.map(text => createElement(Tag.LI, { text })),
+                      }),
+                  ]
+                : []),
         ],
+    });
+}
+
+/** The company name, linked to its website when the data has one. */
+function renderOfficeName(experience) {
+    if (!experience.url) return experience.officeName;
+    return createElement(Tag.ANCHOR, {
+        text: experience.officeName,
+        attributes: {
+            [Attr.HREF]: experience.url,
+            [Attr.TARGET]: LinkTarget.NEW_TAB,
+            [Attr.REL]: LinkRel.EXTERNAL,
+        },
     });
 }

@@ -1,0 +1,64 @@
+/* ============= CURSOR EFFECTS =============
+   The canvas the pointer's ripples, dust, fire and gas are painted on (cursor-effects-view.js). */
+
+.cursor-effects {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 6;
+    pointer-events: none;
+}
+
+/* The pointer has crumbled to dust: hide the real one until it moves again */
+.cursor-dusted,
+.cursor-dusted * {
+    cursor: none !important;
+}
+
+/* ----- Writing near the pointer burns (text-burner.js wraps the word while it does) ----- */
+
+/* Catches fire, glows, chars and thins out. Lasts as long as Burn.BURN_MS. */
+.text-burning {
+    animation: text-burn 0.9s ease-in forwards;
+}
+
+@keyframes text-burn {
+    20% {
+        color: #ffe9a8;
+        text-shadow:
+            0 0 4px #ffb02e,
+            0 -2px 8px #ff7a18,
+            0 -5px 14px rgba(255, 70, 20, 0.8);
+    }
+    55% {
+        color: #f0531c;
+        text-shadow:
+            0 0 5px #ff7a18,
+            0 -4px 12px rgba(230, 50, 20, 0.85),
+            0 -8px 18px rgba(120, 30, 10, 0.5);
+    }
+    100% {
+        color: #2a1a12;
+        text-shadow: none;
+        opacity: 0;
+        filter: blur(1.5px);
+    }
+}
+
+/* Burnt away: gone, but still holding its place in the line */
+.text-burnt {
+    visibility: hidden;
+}
+
+/* Comes back to life. Lasts as long as Burn.REVIVE_MS. */
+.text-reviving {
+    animation: text-revive 0.7s ease-out;
+}
+
+@keyframes text-revive {
+    from {
+        opacity: 0;
+        filter: blur(2px);
+    }
+}

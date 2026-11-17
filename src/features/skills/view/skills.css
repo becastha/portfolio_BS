@@ -77,3 +77,17 @@
     background: #16a34a;
 }
 
+
+/* Frameworks and years beside each language */
+.skill-frameworks {
+    flex: 1;
+    padding: 0 12px;
+    color: #7a6a58;
+    font-size: 0.9rem;
+}
+
+.skill-years {
+    color: #8b7355;
+    font-weight: 600;
+    white-space: nowrap;
+}

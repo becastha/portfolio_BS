@@ -1,30 +1,62 @@
 [
     {
-        "year": "2023-present",
-        "office_name": "System I co. Ltd [株式会社システムアイ]",
-        "role": "Developer",
-        "Environment":"Flutter,Git,AWS,Golang,GCP,Jira",
-        "Total member": "400+ people"
+        "year": "Jul 2026 - Present",
+        "office_name": "CrosslinkCE",
+        "role": "Senior Software Engineer"
     },
     {
-        "year": "2020-2023",
-        "office_name": "Uetomae Co. LTD [株式会社ウエトマエ]",
+        "year": "Mar 2024 - Feb 2026",
+        "office_name": "System I Co. Ltd [株式会社システムアイ]",
+        "url": "https://systemi.co.jp/",
+        "location": "Yokohama, Japan",
         "role": "Developer",
-        "Environment":"php[Laravel],Vuejs,Git,AWS,Golang,Linux[Amazon linux,CentOS],Docker,Windows,Slack,Trello,Jira",
-        "Total member": "6 people [Have the child company in vietnam]"
+        "Environment": "Golang, Next.js, Flutter, AWS, GCP, Agora RTC/RTM, TypeScript, PostgreSQL",
+        "Total member": "400+ people",
+        "responsibilities": [
+            "Development and testing of a banking application, focused on the user management flow in Flutter (on-site dispatch project).",
+            "Migration of a complete fitness application system: rebuilt the legacy iOS application in Flutter for cross-platform support and better performance; moved backend services from Java to Nest.js for scalability, maintainability and API consistency; developed eKYC to cut costs.",
+            "Designed and implemented a concurrent coupon management system for an energy application using AWS Step Functions, ensuring reliability, automation and efficient workflow orchestration.",
+            "Upgraded database infrastructure by migrating PostgreSQL from version 12.3 to 16.5, optimizing query performance and introducing advanced security and indexing features.",
+            "Design and development of an avatar service application: a management server, token server and proxy server connecting to the avatar server via Agora RTC and RTM, plus user interface components."
+        ]
     },
     {
-        "year": "2019-2020",
-        "office_name": "WebGroup Co. LTD [ウエブグループ株式会社]",
-        "role": "Assigned in NTT Data as a developer「NTTデータへ開発者として配属」 ",
-        "Environment":"C,Java,Linux,TortoiseSVN",
-        "Total member": "1 Team-25 people"
+        "year": "Oct 2020 - Mar 2024",
+        "office_name": "Uetomae Co. Ltd [株式会社ウエトマエ]",
+        "url": "https://www.uetomae.co.jp/",
+        "location": "Tokyo, Japan",
+        "role": "Developer",
+        "Environment": "Go (Fiber), Flutter, PHP (Laravel), Unity, MySQL, AWS, Git, Figma, Express.js, Vue.js",
+        "Total member": "6 people [Have the child company in vietnam]",
+        "responsibilities": [
+            "Built an Augmented Reality (AR) application for Japanese schools' graduation ceremonies, later expanding the platform with features including printable album books on order.",
+            "Built a warehouse inventory management system for logistics operations (on-site dispatch project).",
+            "Design and development of a news application, leading offshore development teams in Vietnam.",
+            "Built a real estate application with an integrated feature to check free parking availability around specific properties.",
+            "Design and development of a Japanese novel reading platform where tournaments are held.",
+            "Contributed to UI/UX and system design for a government soil disposal platform."
+        ]
+    },
+    {
+        "year": "Nov 2019 - Oct 2020",
+        "office_name": "Web Group Co. Ltd [ウエブグループ株式会社]",
+        "url": "http://www.webgroup.co.jp/",
+        "location": "Tokyo, Japan",
+        "role": "Developer",
+        "Environment": "Java, C, SQL, TortoiseSVN",
+        "Total member": "1 Team-25 people",
+        "responsibilities": [
+            "On-site dispatch to a telecommunication and networking company.",
+            "Development and testing of a Wi-Fi system that enables automatic authentication for subscribed users.",
+            "Built temporary guest Wi-Fi account creation for non-subscribed users.",
+            "Debugging, testing and optimization of network-related applications."
+        ]
     },
     {
         "year": "2015-2016",
         "office_name": "BMP Infology Co. LTD",
         "role": "Developer",
-        "Environment":"php[laravel framework],Xampp,Mysql,windows",
+        "Environment": "php[laravel framework],Xampp,Mysql,windows",
         "Total member": " 6 people"
     }
 ]

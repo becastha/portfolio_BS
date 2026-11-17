@@ -1,6 +1,8 @@
 // The content features: each loads one resource and renders it into its container on the page.
 // Shared by every entry point, whatever the page around the containers looks like.
 
+import { EducationView } from '../features/education/view/education-view.js';
+import { EducationViewModel } from '../features/education/viewmodel/education-viewmodel.js';
 import { ExperienceView } from '../features/experience/view/experience-view.js';
 import { ExperienceViewModel } from '../features/experience/viewmodel/experience-viewmodel.js';
 import { LanguagesView } from '../features/languages/view/languages-view.js';
@@ -20,6 +22,7 @@ const CONTENT_FEATURES = Object.freeze([
     [ProjectsViewModel, ProjectsView],
     [SkillsViewModel, SkillsView],
     [ExperienceViewModel, ExperienceView],
+    [EducationViewModel, EducationView],
     [LanguagesViewModel, LanguagesView],
 ]);
 

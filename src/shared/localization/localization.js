@@ -27,9 +27,19 @@ class Localization {
         }
     }
 
-    /** Returns the string for a key; falls back to the key itself so a missing string is visible. */
-    t(key) {
-        return this.#strings[key] ?? key;
+    /**
+     * Returns the string for a key; falls back to the key itself so a missing string is visible.
+     * Values in params replace the {name} placeholders of the string.
+     */
+    t(key, params = {}) {
+        const text = this.#strings[key] ?? key;
+        return Object.entries(params).reduce((result, [name, value]) => result.replaceAll(`{${name}}`, value), text);
+    }
+
+    /** Returns the list stored under a key (an empty list when the key is missing or is not a list). */
+    list(key) {
+        const value = this.#strings[key];
+        return Array.isArray(value) ? value : [];
     }
 
     /** Fills every element under root that declares a localization key. */

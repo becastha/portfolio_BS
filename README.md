@@ -6,7 +6,7 @@ I've created a dynamic portfolio that fetches data from a JSON file instead of u
 The site is plain HTML, CSS and ES modules: no build step. It loads JSON with `fetch`, so serve the folder instead of opening `index.html` directly:
 
 ```bash
-python3 -m http.server 8123
+node tools/dev-server.mjs
 ```
 
 Then open http://localhost:8123.
@@ -22,6 +22,8 @@ The earlier notebook version (spiral binding, folding pages, themes, sound, star
 - **Lines:** every line is drawn slowly: the pillars and the plinth stroke by stroke, box borders side by side (`data-ink-box` in `index.html`), and the rules under rows as they scroll into view (`src/shared/ui/line-drawing.js`; timing in `manuscript.css`).
 - **Skyline:** the Kathmandu skyline is drawn along the bottom of the window as the page opens: the pen traces its contours from left to right and the ink follows. The artwork is `src/features/skyline/view/assets/kathmandu-skyline.svg` (the `skyline` feature loads it).
 - **Shooting stars and sparks:** every SVG line has a shooting star on its tip while it is drawn; sparks fly where a line ends and where two stars come close (`src/shared/ui/drawing-stars.js`).
+- **Cursor effects** (mouse only, `src/features/cursor-effects`): water ripples as the pointer moves, fire when it moves fast, the cursor crumbles to dust when it rests for 2.5 seconds, a puff of gas on a left click, and a cloud with a random funny line on a right click (links keep the browser's own menu; the lines are `cursor.cries` in `en.json`). Words the pointer comes close to catch fire, fall as ash, and return after three seconds (links and buttons do not burn). All the numbers are in `cursor-effects-constants.js`.
+- **Settings** (the round button, top right): light or dark paper, and smaller or larger text. Both are remembered.
 - **Name and title:** the name appears letter by letter, then the title. Each entry of `roles` in `profile.json` appears in turn and is knocked down to make way for the next; the last one stays (currently Developer, then Engineer). Timings are in `src/features/profile/profile-constants.js`.
 - Visitors who ask their system for reduced motion see the finished page straight away.
 
@@ -47,7 +49,7 @@ src/
     constants/  data/  localization/  logging/  mvvm/  ui/  styles/
 ```
 
-Features: `notebook` (pages, flipping, zoom, keyboard and swipe), `profile` (cover), `overview`, `projects`, `skills`, `experience`, `languages`, `settings` (theme and font), `sound`, `starfield` (background).
+Features: `notebook` (pages, flipping, zoom, keyboard and swipe), `profile` (cover), `overview`, `projects`, `skills`, `experience`, `education`, `languages`, `settings` (theme and font), `sound`, `starfield` (background).
 
 Rules of the structure:
 
@@ -64,5 +66,6 @@ Rules of the structure:
 | Projects | `src/features/projects/data/projects.json` |
 | Skills | `src/features/skills/data/skills.json` |
 | Work experience | `src/features/experience/data/experience.json` |
+| Education | `src/features/education/data/education.json` |
 | Spoken languages | `src/features/languages/data/languages.json` |
 | Buttons, headers, messages | `src/shared/localization/locales/en.json` |

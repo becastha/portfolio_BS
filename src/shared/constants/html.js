@@ -8,10 +8,12 @@ export const Tag = Object.freeze({
     H1: 'h1',
     H3: 'h3',
     ICON: 'i',
+    LI: 'li',
     P: 'p',
     SPAN: 'span',
     STRONG: 'strong',
     TEMPLATE: 'template',
+    UL: 'ul',
 });
 
 export const Attr = Object.freeze({
@@ -29,7 +31,6 @@ export const LinkTarget = Object.freeze({ NEW_TAB: '_blank' });
 export const LinkRel = Object.freeze({ EXTERNAL: 'noopener noreferrer' });
 
 export const DomEvent = Object.freeze({
-    ANIMATION_END: 'animationend',
     CLICK: 'click',
     DOM_CONTENT_LOADED: 'DOMContentLoaded',
     FULLSCREEN_CHANGE: 'fullscreenchange',

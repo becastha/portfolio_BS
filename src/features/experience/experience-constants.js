@@ -8,12 +8,17 @@ export const EXPERIENCE_CONTAINER_ID = 'experience-container';
 export const ExperienceDataField = Object.freeze({
     YEAR: 'year',
     OFFICE_NAME: 'office_name',
+    URL: 'url',
+    LOCATION: 'location',
     ROLE: 'role',
     ENVIRONMENT: 'Environment',
     TEAM_SIZE: 'Total member',
+    RESPONSIBILITIES: 'responsibilities',
 });
 
 export const ExperienceCssClass = Object.freeze({
     CARD: 'exp-card',
     YEAR: 'exp-year',
+    LOCATION: 'exp-location',
+    RESPONSIBILITIES: 'exp-responsibilities',
 });

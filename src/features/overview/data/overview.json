@@ -1,12 +1,31 @@
 {
     "quote": {
-        "lines": ["\"Code is like humor.", "When you have to explain it, it's bad.\""],
+        "lines": [
+            "\"Code is like humor.",
+            "When you have to explain it, it's bad.\""
+        ],
         "author": "- Cory House"
     },
     "sections": [
-        { "icon": "fa-code", "title": "Languages", "text": "Golang, PHP, Java, Node.js, JavaScript" },
-        { "icon": "fa-layer-group", "title": "Frameworks", "text": "Fiber, Express, Laravel, Spring" },
-        { "icon": "fa-cloud", "title": "Cloud", "text": "AWS [Cognito, DynamoDB, EC2, CloudFront, Lambda, S3], GCP" },
-        { "icon": "fa-database", "title": "Database", "text": "MySQL, SQLite" }
+        {
+            "icon": "fa-database",
+            "title": "Databases",
+            "text": "PostgreSQL, SQLite, libSQL, DynamoDB, MySQL"
+        },
+        {
+            "icon": "fa-cloud",
+            "title": "Cloud",
+            "text": "AWS, GCP"
+        },
+        {
+            "icon": "fa-tools",
+            "title": "Tools",
+            "text": "Docker, Swagger (API development), Figma, Git (GitHub, GitLab), Jira and Confluence, GitHub Projects, Nulab Backlog, Microsoft Office"
+        },
+        {
+            "icon": "fa-desktop",
+            "title": "Systems",
+            "text": "macOS, Windows, Linux (CentOS, Ubuntu, Fedora)"
+        }
     ]
 }

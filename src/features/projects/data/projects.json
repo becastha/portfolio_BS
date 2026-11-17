@@ -1,43 +1,51 @@
-[ 
-     {
+[
+    {
+        "year": "2026 - Present",
+        "title": "Dictionary Mobile App [Side Project]",
+        "role": "Side project, in development",
+        "technologies": "Flutter",
+        "teamSize": "",
+        "description": ""
+    },
+    {
         "year": "2024",
         "title": "Banking Application",
         "role": "Working as a FullStack Developer",
         "technologies": "Flutter",
         "teamSize": "2 people",
-        "description": ""
+        "description": "Development and testing of the user management flow in Flutter (on-site dispatch project)."
     },
     {
         "year": "2024",
         "title": "Real-time Avatar rendering Application",
         "role": "Working as a FullStack Developer",
-        "technologies": "Golang[fiber framework using REST API], Vuejs Framework, AWS[Ec2,Cognito,CloudFront,Aurora]",
+        "technologies": "Golang, Next.js, Agora RTC/RTM",
         "teamSize": "2 people",
-        "description": ""
+        "description": "Management server, token server and proxy server connecting to the avatar server via Agora RTC and RTM, plus user interface components."
     },
     {
         "year": "2024",
         "title": "Energy company app enhancement",
         "role": "Working as a FullStack Developer",
-        "technologies": "Golang[fiber framework using REST API], Vuejs Framework, AWS[Ec2,Cognito,CloudFront,Aurora]",
+        "technologies": "AWS Step Functions",
         "teamSize": "2 people",
-        "description": ""
+        "description": "Concurrent coupon management system built on AWS Step Functions."
     },
     {
         "year": "2023-2024",
         "title": "Database migration ",
         "role": "Working as a FullStack Developer",
-        "technologies": "Golang[fiber framework using REST API], Vuejs Framework, AWS[Ec2,Cognito,CloudFront,Aurora]",
+        "technologies": "PostgreSQL (12.3 to 16.5)",
         "teamSize": "2 people",
-        "description": ""
+        "description": "Migrated PostgreSQL from version 12.3 to 16.5, optimizing query performance and adding advanced security and indexing features."
     },
     {
         "year": "2023",
         "title": "Fitness Application",
         "role": "Working as a FullStack Developer",
-        "technologies": "Golang[fiber framework using REST API], Vuejs Framework, AWS[Ec2,Cognito,CloudFront,Aurora]",
+        "technologies": "Flutter, Nest.js (migrated from Java)",
         "teamSize": "6 people",
-        "description": ""
+        "description": "Rebuilt the legacy iOS application in Flutter, moved backend services from Java to Nest.js, and developed eKYC to cut costs."
     },
     {
         "year": "2023",
@@ -45,7 +53,7 @@
         "role": "Working as a FullStack Developer",
         "technologies": "Golang[fiber framework using REST API], Vuejs Framework, AWS[Ec2,Cognito,CloudFront,Aurora]",
         "teamSize": "2 people",
-        "description": ""
+        "description": "Japanese novel reading platform where tournaments are held."
     },
     {
         "year": "2023",
@@ -94,11 +102,12 @@
         "technologies": "Nodejs[Express framework],GCP",
         "teamSize": "3 people",
         "description": "mobile app that get news from the company's news portal which was made in wordpress"
-    },{
+    },
+    {
         "year": "2020",
         "title": "AR app for School",
         "role": "Worked as a Backend Developer as well as a QA",
-        "technologies": "php[laravel framework],,AWS[Ec2,Cognito,CloudFront,Aurora,Dynamodb]",
+        "technologies": "php[laravel framework],AWS[Ec2,Cognito,CloudFront,Aurora,Dynamodb]",
         "teamSize": "14 people",
         "description": "Augmented Reality "
     }

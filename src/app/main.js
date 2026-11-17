@@ -1,10 +1,15 @@
 // Entry point of the site (index.html): the content features on a single page drawn like
 // an old ink-on-paper architectural sheet.
 
+import { CursorEffectsView } from '../features/cursor-effects/view/cursor-effects-view.js';
+import { EducationCssClass } from '../features/education/education-constants.js';
 import { ExperienceCssClass } from '../features/experience/experience-constants.js';
 import { LanguagesCssClass } from '../features/languages/languages-constants.js';
 import { OverviewCssClass } from '../features/overview/overview-constants.js';
 import { ProjectsCssClass } from '../features/projects/projects-constants.js';
+import { settingsRepository } from '../features/settings/model/settings-repository.js';
+import { SettingsView } from '../features/settings/view/settings-view.js';
+import { SettingsViewModel } from '../features/settings/viewmodel/settings-viewmodel.js';
 import { SkillsCssClass } from '../features/skills/skills-constants.js';
 import { loadSkylineArtwork } from '../features/skyline/model/skyline-repository.js';
 import { SkylineView } from '../features/skyline/view/skyline-view.js';
@@ -22,6 +27,7 @@ const RULED_ROW_SELECTOR = [
     SkillsCssClass.ITEM,
     LanguagesCssClass.ITEM,
     ExperienceCssClass.CARD,
+    EducationCssClass.ITEM,
 ]
     .map(className => `.${className}`)
     .join(', ');
@@ -30,6 +36,8 @@ async function start() {
     await localization.load();
     localization.apply(document);
 
+    new SettingsView(new SettingsViewModel(settingsRepository)).start();
+
     followDrawingLines(document);
     new SkylineView(loadSkylineArtwork).start();
     animateLineDrawings(document);
@@ -37,6 +45,7 @@ async function start() {
     ruleRows(document.body, RULED_ROW_SELECTOR);
 
     startContentFeatures();
+    new CursorEffectsView().start();
 }
 
 whenDocumentReady(start);
